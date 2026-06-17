@@ -1338,33 +1338,80 @@ body::before {
 }
 
 @media (max-width: 768px) {
+  /* --- Navigation --- */
   .nav__links { display: none; }
   .nav__right { display: none; }
   .nav__burger { display: flex; }
-  .nav__inner { padding: 0 24px; }
+  .nav__inner { padding: 0 20px; }
 
-  .section { padding: 80px 0; }
+  /* --- Sections --- */
+  .section { padding: 64px 0; }
+  .container { padding: 0 20px; }
 
+  /* --- Hero --- */
   .hero__inner {
-    padding: 0 24px;
+    padding: 0 20px;
     text-align: center;
+    width: 100%;
+  }
+  .hero__headline {
+    font-size: clamp(1.6rem, 8vw, 2.8rem);
+    line-height: 1.4;
+    width: 100%;
+  }
+  .hero__sub {
+    font-size: 0.95rem;
+    max-width: 100%;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
   }
   .hero__btns { justify-content: center; }
-  .hero__sub { margin-left: auto; margin-right: auto; }
 
-  .who__inner { grid-template-columns: 1fr; gap: 48px; }
+  /* --- Profile Card --- */
+  .profile-card {
+    position: static;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  .profile-card__bio {
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  /* --- WHO section --- */
+  .who__inner { grid-template-columns: 1fr; gap: 36px; }
+  .who__body p {
+    font-size: 0.95rem;
+    text-align: left;
+  }
+  .who__text .section-title {
+    font-size: clamp(1.4rem, 7vw, 2.2rem);
+  }
+
+  /* --- Service Desc --- */
   .service-desc__inner { grid-template-columns: 1fr; gap: 48px; }
 
+  /* --- CTA Band --- */
+  .cta-band { padding: 60px 0; }
   .cta-band__inner {
     flex-direction: column;
     text-align: center;
+    gap: 24px;
   }
 
+  /* --- Grids --- */
   .check-grid { grid-template-columns: 1fr; }
   .deliverables-grid { grid-template-columns: 1fr; }
-
   .platform-grid { grid-template-columns: 1fr; }
   .platform-card--line { grid-column: span 1; }
 
+  /* --- Section titles --- */
+  .section-title {
+    font-size: clamp(1.4rem, 7vw, 2.2rem);
+  }
+
+  /* --- Footer --- */
   .footer__inner { justify-content: center; text-align: center; }
 }
