@@ -1358,8 +1358,9 @@ body::before {
 
 @media (max-width: 768px) {
   /* --- Utility --- */
-  .br-sp { display: block !important; }
+  .br-sp { display: inline !important; }
   .br-pc { display: none !important; }
+  h1, h2, h3, h4, h5, h6, .section-title, p { text-wrap: initial !important; }
 
   /* --- Navigation --- */
   .nav__links { display: none; }
