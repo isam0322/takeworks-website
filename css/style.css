@@ -30,10 +30,14 @@ body {
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-ja);
-  line-height: 1.7;
+  line-height: 1.8;
   overflow-x: hidden;
   word-break: auto-phrase;
   overflow-wrap: break-word;
+}
+
+h1, h2, h3, .section-title, .hero__headline, .cta-band__title {
+  text-wrap: balance;
 }
 
 /* ============================================================
@@ -55,7 +59,7 @@ img { max-width: 100%; display: block; }
 svg { display: block; }
 
 .container {
-  max-width: 1160px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -85,6 +89,7 @@ body::before {
   cursor: pointer;
   transition: all 0.25s var(--ease);
   border: none;
+  white-space: nowrap;
 }
 
 .btn--primary {
@@ -138,7 +143,7 @@ body::before {
 .section-sub {
   font-size: 1rem;
   color: var(--text-muted);
-  max-width: 600px;
+  max-width: 680px;
   margin-bottom: 60px;
   line-height: 1.8;
 }
@@ -298,7 +303,7 @@ body::before {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  max-width: 1000px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 0 40px;
   width: 100%;
@@ -329,8 +334,8 @@ body::before {
   font-size: 1.05rem;
   color: var(--text-muted);
   margin-bottom: 40px;
-  line-height: 1.9;
-  max-width: 600px;
+  line-height: 1.8;
+  max-width: 680px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -1076,7 +1081,7 @@ body::before {
 .who__body p {
   font-size: 1rem;
   color: var(--text-muted);
-  line-height: 1.9;
+  line-height: 1.8;
   margin-bottom: 20px;
   letter-spacing: 0.02em;
 }
@@ -1159,7 +1164,7 @@ body::before {
 .service-desc__body p {
   font-size: 1rem;
   color: var(--text-muted);
-  line-height: 1.9;
+  line-height: 1.8;
   margin-bottom: 20px;
 }
 .service-desc__body strong { color: var(--gold); font-weight: 600; }
@@ -1363,7 +1368,7 @@ body::before {
   .nav__inner { padding: 0 20px; }
 
   /* --- Sections --- */
-  .section { padding: 56px 0; }
+  .section { padding: 80px 0; }
   .container { padding: 0 20px; }
 
   /* --- Hero --- */
@@ -1388,7 +1393,7 @@ body::before {
     margin-left: 0;
     margin-right: 0;
     text-align: center;
-    line-height: 1.85;
+    line-height: 1.8;
   }
   .hero__btns { justify-content: center; }
 
@@ -1399,41 +1404,41 @@ body::before {
   }
   .section-sub {
     font-size: 0.88rem;
-    text-align: center;
+    text-align: left;
+    line-height: 1.8;
   }
 
-  /* --- Profile Card --- */
   .profile-card {
     position: static;
-    padding: 28px 20px;
-    text-align: center;
+    padding: 20px;
+    text-align: left;
   }
   .profile-card__bio {
-    text-align: center;
+    text-align: left;
     font-size: 0.88rem;
-    line-height: 1.75;
+    line-height: 1.8;
   }
 
   /* --- WHO section --- */
   .who__inner { grid-template-columns: 1fr; gap: 36px; }
-  .who__text { text-align: center; }
+  .who__text { text-align: left; }
   .who__body p {
     font-size: 0.9rem;
-    text-align: center;
-    line-height: 1.85;
+    text-align: left;
+    line-height: 1.8;
   }
 
   /* --- Service Desc --- */
   .service-desc__inner { grid-template-columns: 1fr; gap: 40px; }
-  .service-desc__text { text-align: center; }
+  .service-desc__text { text-align: left; }
   .service-desc__body p {
     font-size: 0.9rem;
-    text-align: center;
-    line-height: 1.85;
+    text-align: left;
+    line-height: 1.8;
   }
 
   /* --- Service target list --- */
-  .service-target { text-align: center; }
+  .service-target { text-align: left; }
   .service-list li {
     font-size: 0.9rem;
     text-align: left;
@@ -1449,9 +1454,11 @@ body::before {
 
   /* --- Grids --- */
   .check-grid { grid-template-columns: 1fr; }
+  .check-card { padding: 16px 20px; gap: 12px; }
   .check-card p { font-size: 0.88rem; }
   .check-card p.fit-line { font-size: 0.76rem; letter-spacing: -0.06em; }
   .deliverables-grid { grid-template-columns: 1fr; }
+  .deliverable-card { padding: 20px 24px; }
   .deliverable-card p { font-size: 0.88rem; }
   .platform-grid { grid-template-columns: 1fr; }
   .platform-card--line { grid-column: span 1; }
@@ -1460,12 +1467,12 @@ body::before {
   .apply__inner { text-align: center; }
   .apply__sub {
     font-size: 0.9rem;
-    line-height: 1.85;
-    text-align: center;
+    line-height: 1.8;
+    text-align: left;
   }
   .apply__note {
     font-size: 0.78rem;
-    line-height: 1.75;
+    line-height: 1.8;
   }
 
   /* --- Footer --- */
