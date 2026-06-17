@@ -1336,7 +1336,6 @@ body::before {
 }
 
 @media (max-width: 768px) {
-  .ib { white-space: normal; }
   .nav__links { display: none; }
   .nav__right { display: none; }
   .nav__burger { display: flex; }
