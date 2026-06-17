@@ -32,7 +32,6 @@ body {
   font-family: var(--font-ja);
   line-height: 1.7;
   overflow-x: hidden;
-  word-break: keep-all;
   overflow-wrap: break-word;
 }
 
@@ -154,7 +153,7 @@ body::before {
    NAVIGATION
 ============================================================ */
 .nav {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -1188,7 +1187,7 @@ body::before {
 }
 .check-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 .check-card {
@@ -1335,6 +1334,7 @@ body::before {
   .service-desc__inner { grid-template-columns: 1fr; gap: 48px; }
   .platform-grid { grid-template-columns: repeat(2, 1fr); }
   .platform-card--line { grid-column: span 2; }
+  .check-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
@@ -1349,6 +1349,10 @@ body::before {
   .container { padding: 0 20px; }
 
   /* --- Hero --- */
+  .hero {
+    padding-top: 120px;
+    padding-bottom: 80px;
+  }
   .hero__inner {
     padding: 0 20px;
     text-align: center;
