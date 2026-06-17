@@ -1188,7 +1188,7 @@ body::before {
 }
 .check-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
 }
 .check-card {
@@ -1365,7 +1365,7 @@ body::before {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
-    text-align: left;
+    text-align: center;
   }
   .hero__btns { justify-content: center; }
 
@@ -1382,9 +1382,10 @@ body::before {
 
   /* --- WHO section --- */
   .who__inner { grid-template-columns: 1fr; gap: 36px; }
+  .who__text { text-align: center; }
   .who__body p {
     font-size: 0.95rem;
-    text-align: left;
+    text-align: center;
   }
   .who__text .section-title {
     font-size: clamp(1.4rem, 7vw, 2.2rem);
@@ -1392,6 +1393,12 @@ body::before {
 
   /* --- Service Desc --- */
   .service-desc__inner { grid-template-columns: 1fr; gap: 48px; }
+  .service-desc__text { text-align: center; }
+  .service-desc__body p { text-align: center; }
+
+  /* --- Service target list --- */
+  .service-target { text-align: center; }
+  .service-list li { text-align: left; }
 
   /* --- CTA Band --- */
   .cta-band { padding: 60px 0; }
@@ -1411,6 +1418,11 @@ body::before {
   .section-title {
     font-size: clamp(1.4rem, 7vw, 2.2rem);
   }
+  .section-sub { text-align: center; }
+
+  /* --- Apply section --- */
+  .apply__inner { text-align: center; }
+  .apply__sub { text-align: center; }
 
   /* --- Footer --- */
   .footer__inner { justify-content: center; text-align: center; }
