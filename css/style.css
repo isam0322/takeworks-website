@@ -1358,8 +1358,8 @@ body::before {
 
 @media (max-width: 768px) {
   /* --- Utility --- */
-  .br-sp { display: inline; }
-  .br-pc { display: none; }
+  .br-sp { display: block !important; }
+  .br-pc { display: none !important; }
 
   /* --- Navigation --- */
   .nav__links { display: none; }
