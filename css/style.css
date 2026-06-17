@@ -32,7 +32,8 @@ body {
   font-family: var(--font-ja);
   line-height: 1.7;
   overflow-x: hidden;
-  word-break: auto-phrase;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 a { color: inherit; text-decoration: none; }
