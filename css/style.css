@@ -1345,13 +1345,13 @@ body::before {
   .nav__inner { padding: 0 20px; }
 
   /* --- Sections --- */
-  .section { padding: 64px 0; }
+  .section { padding: 56px 0; }
   .container { padding: 0 20px; }
 
   /* --- Hero --- */
   .hero {
     padding-top: 120px;
-    padding-bottom: 80px;
+    padding-bottom: 72px;
   }
   .hero__inner {
     padding: 0 20px;
@@ -1359,19 +1359,30 @@ body::before {
     width: 100%;
   }
   .hero__headline {
-    font-size: clamp(1.6rem, 8vw, 2.8rem);
+    font-size: clamp(1.5rem, 7.5vw, 2.4rem);
     line-height: 1.4;
     width: 100%;
   }
   .hero__sub {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     max-width: 100%;
     width: 100%;
     margin-left: 0;
     margin-right: 0;
     text-align: center;
+    line-height: 1.85;
   }
   .hero__btns { justify-content: center; }
+
+  /* --- Section headings — smaller so they fit on one or two clean lines --- */
+  .section-title {
+    font-size: clamp(1.1rem, 5.5vw, 1.6rem);
+    line-height: 1.5;
+  }
+  .section-sub {
+    font-size: 0.88rem;
+    text-align: center;
+  }
 
   /* --- Profile Card --- */
   .profile-card {
@@ -1381,31 +1392,37 @@ body::before {
   }
   .profile-card__bio {
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    line-height: 1.75;
   }
 
   /* --- WHO section --- */
   .who__inner { grid-template-columns: 1fr; gap: 36px; }
   .who__text { text-align: center; }
   .who__body p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     text-align: center;
-  }
-  .who__text .section-title {
-    font-size: clamp(1.4rem, 7vw, 2.2rem);
+    line-height: 1.85;
   }
 
   /* --- Service Desc --- */
-  .service-desc__inner { grid-template-columns: 1fr; gap: 48px; }
+  .service-desc__inner { grid-template-columns: 1fr; gap: 40px; }
   .service-desc__text { text-align: center; }
-  .service-desc__body p { text-align: center; }
+  .service-desc__body p {
+    font-size: 0.9rem;
+    text-align: center;
+    line-height: 1.85;
+  }
 
   /* --- Service target list --- */
   .service-target { text-align: center; }
-  .service-list li { text-align: left; }
+  .service-list li {
+    font-size: 0.9rem;
+    text-align: left;
+  }
 
   /* --- CTA Band --- */
-  .cta-band { padding: 60px 0; }
+  .cta-band { padding: 56px 0; }
   .cta-band__inner {
     flex-direction: column;
     text-align: center;
@@ -1414,19 +1431,23 @@ body::before {
 
   /* --- Grids --- */
   .check-grid { grid-template-columns: 1fr; }
+  .check-card p { font-size: 0.88rem; }
   .deliverables-grid { grid-template-columns: 1fr; }
+  .deliverable-card p { font-size: 0.88rem; }
   .platform-grid { grid-template-columns: 1fr; }
   .platform-card--line { grid-column: span 1; }
 
-  /* --- Section titles --- */
-  .section-title {
-    font-size: clamp(1.4rem, 7vw, 2.2rem);
-  }
-  .section-sub { text-align: center; }
-
   /* --- Apply section --- */
   .apply__inner { text-align: center; }
-  .apply__sub { text-align: center; }
+  .apply__sub {
+    font-size: 0.9rem;
+    line-height: 1.85;
+    text-align: center;
+  }
+  .apply__note {
+    font-size: 0.78rem;
+    line-height: 1.75;
+  }
 
   /* --- Footer --- */
   .footer__inner { justify-content: center; text-align: center; }
