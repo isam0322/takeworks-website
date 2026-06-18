@@ -120,7 +120,7 @@ body::before {
 
 .section-label {
   font-family: var(--font-en);
-  font-size: 0.75rem;
+  font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: 0.25em;
   color: var(--gold);
@@ -311,7 +311,7 @@ body::before {
 
 .hero__label {
   font-family: var(--font-en);
-  font-size: 0.75rem;
+  font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: 0.25em;
   color: var(--gold);
@@ -495,7 +495,7 @@ body::before {
 }
 .profile-card__title {
   font-family: var(--font-en);
-  font-size: 0.78rem;
+  font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   color: var(--gold);
@@ -1073,10 +1073,13 @@ body::before {
   background: linear-gradient(90deg, transparent, var(--border), transparent);
 }
 .who__inner {
-  display: grid;
-  grid-template-columns: 380px 1fr;
-  gap: 80px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  max-width: 800px;
+  margin: 0 auto;
+  align-items: center;
+  text-align: center;
 }
 .who__body p {
   font-size: 1rem;
@@ -1121,7 +1124,7 @@ body::before {
 }
 .cta-band__label {
   font-family: var(--font-en);
-  font-size: 0.78rem;
+  font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   color: var(--gold);
@@ -1156,16 +1159,17 @@ body::before {
   background: linear-gradient(90deg, transparent, var(--border), transparent);
 }
 .service-desc__inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 .service-desc__body p {
-  font-size: 1rem;
+  font-size: 1.15rem;
   color: var(--text-muted);
   line-height: 1.8;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 .service-desc__body strong { color: var(--gold); font-weight: 600; }
 
@@ -1179,9 +1183,9 @@ body::before {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  font-size: 0.95rem;
+  font-size: 1.15rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 .service-list__icon {
   color: var(--gold);
@@ -1350,7 +1354,6 @@ body::before {
 @media (max-width: 1024px) {
   .hero__mascot { width: 260px; }
   .who__inner { grid-template-columns: 1fr; gap: 48px; }
-  .service-desc__inner { grid-template-columns: 1fr; gap: 48px; }
   .platform-grid { grid-template-columns: repeat(2, 1fr); }
   .platform-card--line { grid-column: span 2; }
   .check-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1406,43 +1409,43 @@ body::before {
   }
   .section-sub {
     font-size: 0.88rem;
-    text-align: left;
+    text-align: center;
     line-height: 1.8;
   }
 
   .profile-card {
     position: static;
     padding: 20px;
-    text-align: left;
+    text-align: center;
   }
   .profile-card__bio {
-    text-align: left;
+    text-align: center;
     font-size: 0.88rem;
     line-height: 1.8;
   }
 
   /* --- WHO section --- */
-  .who__inner { grid-template-columns: 1fr; gap: 36px; }
-  .who__text { text-align: left; }
+  .who__inner { gap: 36px; }
+  .who__text { text-align: center; }
   .who__body p {
     font-size: 0.9rem;
-    text-align: left;
+    text-align: center;
     line-height: 1.8;
   }
 
   /* --- Service Desc --- */
-  .service-desc__inner { grid-template-columns: 1fr; gap: 40px; }
-  .service-desc__text { text-align: left; }
+  .service-desc__inner { gap: 40px; }
+  .service-desc__text { text-align: center; }
   .service-desc__body p {
     font-size: 0.9rem;
-    text-align: left;
+    text-align: center;
     line-height: 1.8;
   }
 
   /* --- Service target list --- */
   .service-target { text-align: left; }
   .service-list li {
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     text-align: left;
   }
 
@@ -1470,7 +1473,7 @@ body::before {
   .apply__sub {
     font-size: 0.9rem;
     line-height: 1.8;
-    text-align: left;
+    text-align: center;
   }
   .apply__note {
     font-size: 0.78rem;
