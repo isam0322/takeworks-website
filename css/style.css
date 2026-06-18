@@ -1117,11 +1117,11 @@ body::before {
 }
 .cta-band__inner {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  padding: 0 15%;
-  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  gap: 32px;
   position: relative;
   z-index: 1;
 }
@@ -1469,7 +1469,7 @@ body::before {
   .check-card p { font-size: 0.88rem; }
   .check-card p.fit-line { font-size: 0.76rem; letter-spacing: -0.06em; }
   .deliverables-grid { grid-template-columns: 1fr; }
-  .deliverable-card { padding: 20px 24px; }
+  .deliverable-card { padding: 20px 24px; text-align: center; }
   .deliverable-card p { font-size: 0.88rem; }
   .platform-grid { grid-template-columns: 1fr; }
   .platform-card--line { grid-column: span 1; }
