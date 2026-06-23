@@ -1326,6 +1326,74 @@ body::before {
 }
 
 /* ============================================================
+   SNS LINKS
+============================================================ */
+.sns-links {
+  background: var(--bg);
+  position: relative;
+}
+.sns-links::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+.sns-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+.sns-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.sns-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 50% 0%, var(--gold-glow) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+  pointer-events: none;
+}
+.sns-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(200, 169, 110, 0.15);
+}
+.sns-card:hover::before {
+  opacity: 1;
+}
+.sns-card__icon {
+  color: var(--gold);
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+.sns-card__name {
+  font-family: var(--font-en);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  position: relative;
+  z-index: 1;
+  text-transform: uppercase;
+}
+
+/* ============================================================
    FOOTER
 ============================================================ */
 .footer {
@@ -1362,6 +1430,7 @@ body::before {
   .platform-grid { grid-template-columns: repeat(2, 1fr); }
   .platform-card--line { grid-column: span 2; }
   .check-grid { grid-template-columns: repeat(2, 1fr); }
+  .sns-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
@@ -1417,6 +1486,13 @@ body::before {
     text-align: center;
     line-height: 1.8;
   }
+
+  /* --- SNS --- */
+  .sns-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .sns-card { padding: 24px 12px; }
+  .sns-card__icon { margin-bottom: 8px; }
+  .sns-card__icon svg { width: 20px; height: 20px; }
+  .sns-card__name { font-size: 0.9rem; }
 
   .profile-card {
     position: static;
