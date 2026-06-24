@@ -31,6 +31,9 @@
   <nav class="nav" id="nav">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">TAKE<span> WORKS</span></a>
+      <div class="nav__links" style="margin-left: auto; margin-right: 32px;">
+        <a href="#portfolio">PORTFOLIO</a>
+      </div>
       <div class="nav__right">
         <a href="service.html" class="nav__cta-link" id="navServiceBtn">無料診断の詳細を見る →</a>
       </div>
@@ -40,6 +43,7 @@
     </div>
     <div class="nav__mobile" id="navMobile">
       <ul>
+        <li><a href="#portfolio" class="mobile-link">PORTFOLIO</a></li>
         <li><a href="service.html" class="mobile-link">無料診断の詳細を見る</a></li>
       </ul>
     </div>
@@ -134,6 +138,27 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+    PORTFOLIO
+  ============================================================ -->
+  <section class="portfolio section" id="portfolio" style="background: var(--bg-card); position: relative;">
+    <div class="container">
+      <div class="section-label reveal">PORTFOLIO</div>
+      <h2 class="section-title reveal">AIコンテンツ制作事例</h2>
+      <div class="portfolio__content reveal" style="margin-top: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
+        <p style="text-align: center; margin-bottom: 32px; color: var(--text-muted); line-height: 1.8;">
+          本日の作成事例：AIを活用して構成・デザインを行ったスライド資料です。
+        </p>
+        <div class="pdf-wrapper" style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: 0 20px 40px rgba(0,0,0,0.4); background: #fff;">
+          <iframe src="assets/pdf/voice_ai_portfolio_slides.pdf#view=FitH" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" title="AIコンテンツ制作事例 PDF"></iframe>
+        </div>
+        <div style="text-align: center; margin-top: 32px;">
+           <a href="assets/pdf/voice_ai_portfolio_slides.pdf" target="_blank" class="btn btn--outline" style="font-size: 0.9rem;">PDFを別タブで開く</a>
+        </div>
       </div>
     </div>
   </section>
