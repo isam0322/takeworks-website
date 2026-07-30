@@ -1565,3 +1565,164 @@ body::before {
   /* --- Footer --- */
   .footer__inner { justify-content: center; text-align: center; }
 }
+
+/* ============================================================
+   2026-07 REFRESH — 方向宣言に基づく修理
+   ①和文H1を和文書体へ ②ヒーロー階層の整理 ③受け皿(LINE)を主役化
+   新色は足さない（既存トークンのみ使用）
+============================================================ */
+
+/* ── ① 和文ヘッドライン: 欧文書体の誤適用を修正 ── */
+.hero__headline--ja {
+  font-family: var(--font-ja);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.45;
+  font-size: clamp(1.65rem, 4.2vw, 3.4rem);
+  text-wrap: balance;
+}
+.hero__headline--ja span {
+  display: inline-block;
+  margin-top: 0.25em;
+}
+
+/* ── ② ヒーロー: 主役をH1に、補足を沈める ── */
+.hero__sub {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: var(--text-muted);
+}
+
+.hero__benefit {
+  margin-top: 3rem;
+  padding: 2rem 1.8rem;
+  text-align: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+.hero__benefit-title {
+  font-weight: 700;
+  color: var(--gold);
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 1rem;
+}
+.hero__benefit-lead {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+.hero__benefit-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem auto;
+  display: inline-block;
+  text-align: left;
+  color: var(--text);
+}
+.hero__benefit-list li {
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 0.35em;
+  font-size: 1rem;
+}
+.hero__benefit-list li::before {
+  content: '';
+  position: absolute;
+  left: 0.15em;
+  top: 0.72em;
+  width: 0.6em;
+  height: 1px;
+  background: var(--gold);
+}
+.hero__benefit-note {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  line-height: 1.85;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+/* ── ③ 受け皿(公式LINE)を主役化・他7本を沈める ── */
+.sns-card--primary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  max-width: 560px;
+  margin: 40px auto 0;
+  padding: 34px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-lg);
+}
+.sns-card--primary .sns-card__name {
+  font-family: var(--font-ja);
+  font-size: 1.25rem;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--gold);
+}
+.sns-card__note {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  position: relative;
+  z-index: 1;
+}
+
+.sns-sub-label {
+  margin-top: 56px;
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+}
+.sns-grid--sub {
+  margin-top: 18px;
+  gap: 12px;
+}
+.sns-grid--sub .sns-card {
+  padding: 18px 10px;
+  background: transparent;
+  border-color: rgba(200, 169, 110, 0.14);
+  border-radius: var(--radius);
+}
+.sns-grid--sub .sns-card:hover {
+  transform: translateY(-2px);
+  box-shadow: none;
+  border-color: var(--border-hover);
+}
+.sns-grid--sub .sns-card__name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+.sns-grid--sub .sns-card:hover .sns-card__name { color: var(--text); }
+
+@media (max-width: 768px) {
+  .hero__headline--ja { font-size: clamp(1.5rem, 6.5vw, 2rem); line-height: 1.5; }
+  .sns-card--primary { padding: 28px 18px; margin-top: 32px; }
+  .sns-grid--sub { grid-template-columns: repeat(3, 1fr); }
+  .hero__benefit { padding: 1.6rem 1.2rem; }
+}
+
+/* ── アクセシビリティ: フォーカス可視・モーション配慮 ── */
+a:focus-visible, .btn:focus-visible, .sns-card:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .sns-card:hover, .sns-card--primary:hover { transform: none; }
+}
