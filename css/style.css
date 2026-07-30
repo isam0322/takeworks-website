@@ -1726,3 +1726,47 @@ a:focus-visible, .btn:focus-visible, .sns-card:focus-visible {
   }
   .sns-card:hover, .sns-card--primary:hover { transform: none; }
 }
+
+/* ── 特商法表記ページ ── */
+.legal-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 40px;
+  font-size: 0.95rem;
+  line-height: 1.9;
+}
+.legal-table th,
+.legal-table td {
+  border: 1px solid var(--border);
+  padding: 16px 20px;
+  text-align: left;
+  vertical-align: top;
+}
+.legal-table th {
+  width: 30%;
+  background: var(--bg-card);
+  color: var(--gold);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.legal-table td { color: var(--text); }
+.legal-note {
+  margin-top: 32px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+@media (max-width: 640px) {
+  .legal-table, .legal-table tbody, .legal-table tr, .legal-table th, .legal-table td { display: block; width: 100%; }
+  .legal-table tr { margin-bottom: 16px; border: 1px solid var(--border); }
+  .legal-table th, .legal-table td { border: none; white-space: normal; }
+  .legal-table th { padding-bottom: 4px; }
+  .legal-table td { padding-top: 0; }
+}
+.footer__legal {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s var(--ease);
+}
+.footer__legal:hover { color: var(--gold); }
