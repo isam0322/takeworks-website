@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=12" />
+  <link rel="stylesheet" href="css/style.css?v=13" />
 </head>
 <body>
 
@@ -32,10 +32,10 @@
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">TAKE<span> WORKS</span></a>
       <div class="nav__links" style="margin-left: auto; margin-right: 32px;">
-        <a href="#portfolio">PORTFOLIO</a>
+        <a href="#works">WORKS</a>
       </div>
       <div class="nav__right">
-        <a href="service.html" class="nav__cta-link" id="navServiceBtn">無料診断の詳細を見る →</a>
+        <a href="https://lin.ee/ZqVM0cm" target="_blank" rel="noopener noreferrer" class="nav__cta-link" id="navLineBtn">公式LINEを登録 →</a>
       </div>
       <button class="nav__burger" id="navBurger" aria-label="メニューを開く">
         <span></span><span></span><span></span>
@@ -43,8 +43,8 @@
     </div>
     <div class="nav__mobile" id="navMobile">
       <ul>
-        <li><a href="#portfolio" class="mobile-link">PORTFOLIO</a></li>
-        <li><a href="service.html" class="mobile-link">無料診断の詳細を見る</a></li>
+        <li><a href="#works" class="mobile-link">WORKS</a></li>
+        <li><a href="https://lin.ee/ZqVM0cm" target="_blank" rel="noopener noreferrer" class="mobile-link">公式LINEを登録</a></li>
       </ul>
     </div>
   </nav>
@@ -64,18 +64,7 @@
         </h1>
         <p class="hero__sub fade-in" data-delay="200">消防士15年、DJ10年。その二つをAIで繋いで、<br class="br-pc">好きなカルチャーを仕事の柱に変える過程を、全部公開しています。</p>
         <div class="hero__btns fade-in" data-delay="300">
-          <a href="service.html" class="btn btn--primary btn--lg" id="heroServiceBtn" style="font-size: 1.1rem; padding: 1.2rem 3rem;">無料診断の詳細を見る</a>
-        </div>
-        <div class="hero__benefit fade-in" data-delay="400">
-          <p class="hero__benefit-title">現在、事例作りを兼ねて無料で実施中です。</p>
-          <p class="hero__benefit-lead">SNS・HP・note・LINE・ニュースレター・音声・動画を拝見し、</p>
-          <ul class="hero__benefit-list">
-            <li>改善案10個</li>
-            <li>優先順位TOP3</li>
-            <li>次に作るべきコンテンツ</li>
-          </ul>
-          <p class="hero__benefit-lead">を整理してお渡しします。</p>
-          <p class="hero__benefit-note">診断は無料です。内容をうかがったうえで、お手伝いできそうなことがあれば最後に有料プランをご提案する場合があります。合わない場合は遠慮なくお断りください。</p>
+          <a href="#works" class="btn btn--primary btn--lg" id="heroWorksBtn" style="font-size: 1.1rem; padding: 1.2rem 3rem;">作品を見る</a>
         </div>
       </div>
     </div>
@@ -102,14 +91,11 @@
               「好きなことでは食えない」。その声は、周りからだけでなく、たいてい自分の中からも聞こえてきます。私も消防士を15年やりながらDJを続けて、同じ声を聞いていました。
             </p>
             <p style="margin-bottom: 24px;">
-              必要なのは才能や勢いではなく、<strong style="color: var(--gold);">好きなものを外に出し続けるための手順</strong>です。SNS、note、LINE、ニュースレター、ホームページ、音声、動画をバラバラに放置せず、自分の名前で仕事が来る順番に整えること。
+              必要なのは才能や勢いではなく、<strong style="color: var(--gold);">好きなものを外に出し続けるための手順</strong>だと思っています。作る、出す、届ける。その順番を自分で組み直せるかどうかだけの話です。
             </p>
             <p style="margin-bottom: 32px;">
-              まずは、あなたの現状を一緒に見ることから始めましょう。
+              いま私がその手順をどう組んでいるのか、作ったものと一緒に、ここで全部公開していきます。
             </p>
-          </div>
-          <div class="reveal">
-            <a href="service.html" class="btn btn--outline" id="whoServiceBtn">何をしてくれるの？→ サービスを見る</a>
           </div>
         </div>
 
@@ -124,12 +110,12 @@
               元消防士（15年）。現場で求められるのは、状況を見て優先順位を決め、今やるべきことを「実行」する力でした。<br><br>そのかたわらで10年以上、HIPHOPのDJとビートメイクを続けてきました。その二つをAIで繋いで、好きなものを仕事の柱に変える過程をここで公開しています。
             </div>
             <div class="profile-card__tags">
-              <span>#音楽制作</span>
-              <span>#note制作</span>
-              <span>#ニュースレター制作</span>
+              <span>#HIPHOP</span>
+              <span>#DJ</span>
+              <span>#ビートメイク</span>
               <div style="flex-basis: 100%; height: 0; margin: 0;"></div>
-              <span>#LP・HP制作</span>
-              <span>#コンテンツ再活用</span>
+              <span>#AI活用</span>
+              <span>#制作過程の公開</span>
             </div>
           </div>
         </div>
@@ -141,20 +127,51 @@
   <!-- ============================================================
     PORTFOLIO
   ============================================================ -->
-  <section class="portfolio section" id="portfolio" style="background: var(--bg-card); position: relative;">
+  <section class="portfolio section" id="works" style="background: var(--bg-card); position: relative;">
     <div class="container">
-      <div class="section-label reveal">PORTFOLIO</div>
-      <h2 class="section-title reveal">AIコンテンツ制作事例</h2>
-      <div class="portfolio__content reveal" style="margin-top: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
-        <p style="text-align: center; margin-bottom: 32px; color: var(--text-muted); line-height: 1.8;">
-          本日の作成事例：AIを活用して構成・デザインを行ったスライド資料です。
-        </p>
-        <div class="pdf-wrapper" style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: 0 20px 40px rgba(0,0,0,0.4); background: #fff;">
-          <iframe src="assets/pdf/voice_ai_portfolio_slides.pdf#view=FitH" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" title="AIコンテンツ制作事例 PDF"></iframe>
-        </div>
-        <div style="text-align: center; margin-top: 32px;">
-           <a href="assets/pdf/voice_ai_portfolio_slides.pdf" target="_blank" class="btn btn--outline" style="font-size: 0.9rem;">PDFを別タブで開く</a>
-        </div>
+      <div class="section-label reveal">WORKS</div>
+      <h2 class="section-title reveal">作ったもの</h2>
+      <p class="works__lead reveal">好きなものを仕事の柱に変える過程で、実際に作って世に出したものです。</p>
+
+      <div class="works-list reveal">
+
+        <article class="work-card">
+          <div class="work-card__meta">
+            <span class="work-card__type">MUSIC</span>
+            <span class="work-card__date">2026.06.13</span>
+          </div>
+          <h3 class="work-card__title">ZASHIKI</h3>
+          <p class="work-card__desc">インストHIPHOP 全7曲。初のリリース作品。ビートは自分で制作し、DistroKid経由で各配信サービスへ。</p>
+          <div class="work-card__links">
+            <a href="https://music.apple.com/us/album/zashiki/6778013028" target="_blank" rel="noopener noreferrer">Apple Music</a>
+            <a href="https://open.spotify.com/intl-ja/track/0nyvBLzvUktXjzL9evwq5B?si=8aca7f522b0842ad" target="_blank" rel="noopener noreferrer">Spotify</a>
+          </div>
+        </article>
+
+        <article class="work-card work-card--upcoming">
+          <div class="work-card__meta">
+            <span class="work-card__type">MUSIC</span>
+            <span class="work-card__date">2026.08.01 RELEASE</span>
+          </div>
+          <h3 class="work-card__title">1st ALBUM</h3>
+          <p class="work-card__desc">1枚目のフルアルバム。作業中でも、移動中でも、何も考えたくない夜でも流せるように作った全曲インストです。</p>
+          <div class="work-card__links">
+            <a href="https://www.youtube.com/@take_works1" target="_blank" rel="noopener noreferrer">YouTube</a>
+          </div>
+        </article>
+
+        <article class="work-card">
+          <div class="work-card__meta">
+            <span class="work-card__type">WEB</span>
+            <span class="work-card__date">2026</span>
+          </div>
+          <h3 class="work-card__title">このサイト</h3>
+          <p class="work-card__desc">AIを使って設計・制作・公開まで行った自社サイト。作り方そのものが、これから出していくコンテンツの題材になります。</p>
+          <div class="work-card__links">
+            <a href="https://note.com/tim15" target="_blank" rel="noopener noreferrer">制作過程をnoteで公開</a>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
@@ -164,12 +181,12 @@
   ============================================================ -->
   <section class="sns-links section" id="sns">
     <div class="container">
-      <div class="section-label reveal">CONTACT</div>
-      <h2 class="section-title reveal">まずは公式LINEから</h2>
+      <div class="section-label reveal">SUBSCRIBE</div>
+      <h2 class="section-title reveal">新しく作ったものは、<br class="br-sp">ここに最初に届きます。</h2>
 
       <a href="https://lin.ee/ZqVM0cm" target="_blank" rel="noopener noreferrer" class="sns-card sns-card--primary reveal">
         <div class="sns-card__name">公式LINE</div>
-        <div class="sns-card__note">無料診断のお申し込み・ご相談はこちら</div>
+        <div class="sns-card__note">新作のリリースと、その制作過程をお届けします</div>
       </a>
 
       <p class="sns-sub-label reveal">その他の発信メディア</p>
@@ -195,21 +212,6 @@
         <a href="https://open.spotify.com/intl-ja/track/0nyvBLzvUktXjzL9evwq5B?si=8aca7f522b0842ad" target="_blank" rel="noopener noreferrer" class="sns-card">
           <div class="sns-card__name">Spotify</div>
         </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-    CTA BAND
-  ============================================================ -->
-  <section class="cta-band" id="ctaBand">
-    <div class="container">
-      <div class="cta-band__inner reveal">
-        <div class="cta-band__text">
-          <p class="cta-band__label">現在、事例作りも兼ねて無料で実施中</p>
-          <h2 class="cta-band__title">発信まわりの<br class="br-pc" /><span>無料診断</span></h2>
-        </div>
-        <a href="service.html" class="btn btn--primary btn--lg" id="ctaBandBtn">無料診断の詳細を見る</a>
       </div>
     </div>
   </section>
