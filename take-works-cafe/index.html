@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="TAKE WORKS CAFEは、レコードとコーヒーを軸にした架空のカルチャーカフェLP制作サンプルです。DJイベント、グッズ販売、イベント相談の導線を設計しています。"
+    />
+    <title>TAKE WORKS CAFE | Coffee, Records & Culture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=Noto+Serif+JP:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">本文へ移動</a>
+
+    <header class="site-header" id="top">
+      <div class="container header-inner">
+        <a class="logo" href="index.html" aria-label="TAKE WORKS CAFE HOMEへ">
+          <span class="logo-mark" aria-hidden="true">T</span>
+          <span>TAKE WORKS CAFE</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          <span class="sr-only">メニューを開く</span>
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="主要メニュー">
+          <a href="#concept">Concept</a>
+          <a href="#music">Music</a>
+          <a href="#shop">Menu & Shop</a>
+          <a href="#event">DJ CAFE DAY</a>
+          <a class="button button-small" href="#contact">イベント相談</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-media" aria-hidden="true">
+          <img src="../assets/cafe/hero-cafe.png" alt="" />
+        </div>
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <h1 id="hero-title">TAKE WORKS CAFE</h1>
+            <p class="hero-lead">
+              <span class="text-line">コーヒーと</span>
+              <span class="text-line">レコードが、</span>
+              <span class="text-line">日常の温度を変える。</span>
+            </p>
+            <p class="hero-text">
+              昼は静かに音楽を楽しむカフェ。週末はDJイベントも開ける、カルチャーのある場所です。
+            </p>
+            <div class="hero-actions" aria-label="主要アクション">
+              <a class="button" href="#event">DJ CAFE DAYを見る</a>
+              <a class="button button-secondary" href="#contact">イベント相談をする</a>
+            </div>
+            <p class="hero-tags">Records / Coffee / DJ Booth / Original Goods</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section concept" id="concept" aria-labelledby="concept-title">
+        <div class="container concept-grid">
+          <div class="section-copy">
+            <p class="section-label">CONCEPT</p>
+            <h2 id="concept-title">
+              <span class="text-line">ただ飲むだけではなく、</span>
+              <span class="text-line">音楽と過ごすカフェ。</span>
+            </h2>
+          </div>
+          <div class="concept-body">
+            <p>
+              TAKE WORKS CAFEは、レコードの音とコーヒーの香りがある小さなカルチャーカフェです。
+            </p>
+            <p>
+              ひとりで本を読む時間も、誰かと話す時間も、流れている音で少しだけ深くなる。そんな日常の余白をつくります。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section why" aria-labelledby="why-title">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-label">WHY THIS PLACE</p>
+            <h2 id="why-title">
+              <span class="text-line">時間は同じでも、</span>
+              <span class="text-line">残り方は変えられる。</span>
+            </h2>
+          </div>
+          <div class="record-row">
+            <article class="record-card">
+              <div class="record-illustration illustration-cup" aria-hidden="true">
+                <svg viewBox="0 0 120 120" role="img">
+                  <path d="M32 64h48v13c0 12-9 21-21 21h-6c-12 0-21-9-21-21V64Z" />
+                  <path d="M80 69h7c7 0 12 5 12 12s-5 12-12 12h-8" />
+                  <path d="M38 54c-5-8 6-11 0-20M57 54c-5-8 6-11 0-20M76 54c-5-8 6-11 0-20" />
+                  <path d="M25 98h68" />
+                </svg>
+              </div>
+              <span class="card-label">Before</span>
+              <h3>ただ過ぎる時間</h3>
+              <p>コーヒーを飲んで、スマホを見て、気づけば時間だけが過ぎている。</p>
+            </article>
+            <article class="record-card">
+              <div class="record-illustration illustration-record" aria-hidden="true">
+                <svg viewBox="0 0 120 120" role="img">
+                  <circle cx="58" cy="60" r="36" />
+                  <circle cx="58" cy="60" r="9" />
+                  <path d="M92 29v45c0 9-7 16-16 16" />
+                  <path d="M92 29l14 7v10l-14-7" />
+                  <path d="M28 91c9 8 21 13 34 13 15 0 29-7 39-18" />
+                </svg>
+              </div>
+              <span class="card-label">After</span>
+              <h3>記憶に残る時間</h3>
+              <p>レコードの音が流れて、その日の気分や会話まで少し記憶に残る。</p>
+            </article>
+            <article class="record-card">
+              <div class="record-illustration illustration-bridge" aria-hidden="true">
+                <svg viewBox="0 0 120 120" role="img">
+                  <path d="M24 78h72" />
+                  <path d="M34 42v36M60 27v51M86 51v27" />
+                  <circle cx="34" cy="42" r="8" />
+                  <circle cx="60" cy="27" r="8" />
+                  <circle cx="86" cy="51" r="8" />
+                  <path d="M25 96c16 7 54 10 70-8" />
+                </svg>
+              </div>
+              <span class="card-label">Bridge</span>
+              <h3>空気を整える選曲</h3>
+              <p>DJの選曲が、カフェの空気を整える。音量もテンポも、時間帯に合わせて変えていく。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section music" id="music" aria-labelledby="music-title">
+        <div class="container music-grid">
+          <figure class="image-frame">
+            <img src="../assets/cafe/coffee-records.png" alt="木のテーブルに置かれたコーヒー、ドリッパー、レコード" />
+          </figure>
+          <div class="section-copy">
+            <p class="section-label">MUSIC DIRECTION</p>
+            <h2 id="music-title">
+              <span class="text-line">会話を邪魔せず、</span>
+              <span class="text-line">記憶には残る音を。</span>
+            </h2>
+            <p>
+              TAKE WORKS CAFEの音楽は、ただ好きな曲を流すだけではありません。朝のコーヒー、昼の読書、夕方の会話、週末のイベント。その時間に合うレコードを選び、店の温度をつくります。
+            </p>
+            <div class="time-list">
+              <div><span>Morning</span><p>静かに立ち上がるジャズ、ソウル、アンビエント。</p></div>
+              <div><span>Afternoon</span><p>会話と読書の邪魔をしない、温度のあるグルーヴ。</p></div>
+              <div><span>Weekend</span><p>DJイベントやゲスト選曲で、少しだけ街の熱を持ち込む。</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section experience" aria-labelledby="experience-title">
+        <div class="container">
+          <div class="section-heading centered">
+            <p class="section-label">EXPERIENCE</p>
+            <h2 id="experience-title">
+              <span class="text-line">席に着く。</span>
+              <span class="text-line">音が流れる。</span>
+              <span class="text-line">少し長くいたくなる。</span>
+            </h2>
+          </div>
+          <div class="experience-grid">
+            <article>
+              <div class="experience-top illustration-coffee">
+                <span>01</span>
+                <svg aria-hidden="true" viewBox="0 0 64 64"><path d="M14 30h28v9c0 8-6 14-14 14s-14-6-14-14v-9Z" /><path d="M42 34h4a8 8 0 0 1 0 16h-5" /><path d="M18 23c-3-5 4-7 1-12M30 23c-3-5 4-7 1-12" /></svg>
+              </div>
+              <h3>Coffee</h3>
+              <p>日常に戻れる、深煎りと季節の一杯。</p>
+            </article>
+            <article>
+              <div class="experience-top illustration-vinyl">
+                <span>02</span>
+                <svg aria-hidden="true" viewBox="0 0 64 64"><circle cx="32" cy="32" r="22" /><circle cx="32" cy="32" r="5" /><path d="M17 47c8 7 22 9 32-2" /></svg>
+              </div>
+              <h3>Records</h3>
+              <p>棚から選ぶ楽しさと、店内に流れるアナログの質感。</p>
+            </article>
+            <article>
+              <div class="experience-top illustration-conversation">
+                <span>03</span>
+                <svg aria-hidden="true" viewBox="0 0 64 64"><path d="M12 18h40v26H28L17 54V44h-5V18Z" /><path d="M22 29h20M22 37h13" /></svg>
+              </div>
+              <h3>Conversation</h3>
+              <p>音があるのに話しやすい、ちょうどいい余白。</p>
+            </article>
+            <article>
+              <div class="experience-top illustration-booth">
+                <span>04</span>
+                <svg aria-hidden="true" viewBox="0 0 64 64"><rect x="10" y="26" width="44" height="24" rx="4" /><circle cx="25" cy="38" r="7" /><circle cx="41" cy="38" r="4" /><path d="M36 19h12M42 19v7" /></svg>
+              </div>
+              <h3>DJ Booth</h3>
+              <p>週末には、店の奥が小さなDJブースに変わる。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shop" id="shop" aria-labelledby="shop-title">
+        <div class="container shop-grid">
+          <div class="section-copy">
+            <p class="section-label">MENU & SHOP</p>
+            <h2 id="shop-title">
+              <span class="text-line">飲むものも、</span>
+              <span class="text-line">持ち帰るものも。</span>
+            </h2>
+            <p>
+              コーヒー、焼き菓子、軽食に加えて、家でも楽しめる豆や器具、店の空気を持ち帰れるオリジナルグッズを用意しています。
+            </p>
+            <div class="menu-board">
+              <div><strong>Coffee</strong><span>ハンドドリップ、カフェラテ、季節のブレンド。</span></div>
+              <div><strong>Beans & Tools</strong><span>コーヒー豆、ドリッパー、フィルター、抽出器具。</span></div>
+              <div><strong>Original Goods</strong><span>Tシャツ、スウェット、トートバッグ、マグカップ、手拭い。</span></div>
+              <div><strong>Sweets & Light Meal</strong><span>焼き菓子、トースト、イベント限定メニュー。</span></div>
+            </div>
+            <p class="shop-note">
+              豆やグッズは店頭とイベント時に販売。オンラインストアは準備中です。
+            </p>
+          </div>
+          <figure class="image-frame shop-image">
+            <img src="../assets/cafe/menu-shop.png" alt="コーヒー豆、ドリッパー、マグカップ、トートバッグ、衣類などの店内販売アイテム" />
+          </figure>
+        </div>
+      </section>
+
+      <section class="section event" id="event" aria-labelledby="event-title">
+        <div class="container event-grid">
+          <figure class="image-frame event-image">
+            <img src="../assets/cafe/dj-cafe-day.png" alt="カフェ店内の小さなDJブースと、コーヒーを飲みながら音楽を楽しむ人たち" />
+          </figure>
+          <div class="event-copy">
+            <p class="section-label">DJ CAFE DAY</p>
+            <h2 id="event-title">
+              <span class="text-line">週末だけ、</span>
+              <span class="text-line">カフェの音が少し前に出る。</span>
+            </h2>
+            <p>
+              週末は、店内のDJブースからレコードを中心に選曲します。大きな音で踊るイベントではなく、コーヒーを飲みながら音楽に出会える時間。
+            </p>
+            <p>
+              ゲストDJ、レコード持ち寄り、展示やポップアップも企画できます。
+            </p>
+            <a class="button button-light" href="#next-event">次のDJ CAFE DAYを見る</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section next-event" id="next-event" aria-labelledby="next-event-title">
+        <div class="container next-event-wrap">
+          <div class="section-copy">
+            <p class="section-label">NEXT DJ CAFE DAY</p>
+            <h2 id="next-event-title">
+              <span class="text-line">次の週末、</span>
+              <span class="text-line">コーヒーとレコードを。</span>
+            </h2>
+            <p>
+              レコードを中心にした小さな店内イベント。音楽を聴きに来る人も、コーヒーを飲みに来る人も、同じ空間で過ごせる一日です。
+            </p>
+          </div>
+          <article class="event-ticket" aria-label="サンプルイベント情報">
+            <p class="sample-badge">Portfolio Sample</p>
+            <p class="event-date"><span>08.24</span> Sat</p>
+            <h3>Coffee, Records & Guest Selectors</h3>
+            <dl>
+              <div><dt>Time</dt><dd>17:00 - 21:00</dd></div>
+              <div><dt>Charge</dt><dd>1 drink order</dd></div>
+              <div><dt>Style</dt><dd>Vinyl / Soul / Jazz / Ambient</dd></div>
+            </dl>
+            <p class="ticket-note">※架空LP用のサンプルイベントです。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section selector-profile" aria-labelledby="selector-title">
+        <div class="container selector-grid">
+          <div class="selector-mark" aria-hidden="true">
+            <span>TW</span>
+            <small>SELECTED</small>
+          </div>
+          <div class="section-copy">
+            <p class="section-label">SELECTED BY TAKE WORKS</p>
+            <h2 id="selector-title">
+              <span class="text-line">空間の温度に合わせて、</span>
+              <span class="text-line">レコードを選ぶ。</span>
+            </h2>
+            <p>
+              盛り上げるためだけではなく、会話の邪魔をしない音、ひとりの時間に寄り添う音、人が集まる日の熱をつくる音を選びます。
+            </p>
+            <p>
+              TAKE WORKS CAFEのDJは、曲を目立たせるよりも、その場の空気が自然に深くなることを大切にしています。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section private-use" aria-labelledby="private-title">
+        <div class="container private-grid">
+          <div class="section-copy">
+            <p class="section-label">EVENT & PRIVATE USE</p>
+            <h2 id="private-title">
+              <span class="text-line">小さな集まりに、</span>
+              <span class="text-line">音楽のある背景を。</span>
+            </h2>
+            <p>
+              DJイベント、展示、ポップアップ、トークイベント、貸切利用の相談を受け付けています。音楽が主役の日も、会話を支える日も、その場に合う音を一緒に考えます。
+            </p>
+            <a class="text-link" href="#contact">イベント・貸切を相談する <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="use-list">
+            <article><span>DJ Event</span><p>レコード中心の小さな音楽イベント。</p></article>
+            <article><span>Pop-up</span><p>アパレル、ZINE、コーヒー豆、雑貨の販売企画。</p></article>
+            <article><span>Private Party</span><p>誕生日、交流会、少人数の貸切。</p></article>
+            <article><span>Exhibition</span><p>写真、アート、カルチャー展示。</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section information" aria-labelledby="info-title">
+        <div class="container info-grid">
+          <div class="section-copy">
+            <p class="section-label">INFORMATION</p>
+            <h2 id="info-title">
+              <span class="text-line">来店前に、</span>
+              <span class="text-line">知っておきたいこと。</span>
+            </h2>
+            <p class="portfolio-note">※以下はポートフォリオ用の架空店舗情報です。</p>
+          </div>
+          <div class="info-list">
+            <div><span>Open</span><p>Weekday 11:00 - 20:00 / Weekend 11:00 - 22:00</p></div>
+            <div><span>Seat</span><p>カウンター6席、テーブル12席。ひとりでも入りやすい小さな店内。</p></div>
+            <div><span>Access</span><p>駅から徒歩7分の路面店を想定した架空ロケーション。</p></div>
+            <div><span>Payment</span><p>現金、クレジットカード、主要キャッシュレス決済に対応想定。</p></div>
+            <div><span>Shop</span><p>コーヒー豆、器具、オリジナルグッズは店頭・イベント時に販売。</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section faq" aria-labelledby="faq-title">
+        <div class="container narrow">
+          <div class="section-heading centered">
+            <p class="section-label">FAQ</p>
+            <h2 id="faq-title">
+              <span class="text-line">はじめてでも、</span>
+              <span class="text-line">入りやすい場所に。</span>
+            </h2>
+          </div>
+          <div class="faq-list">
+            <details><summary>ひとりでも入れますか？</summary><p>はい。ひとりでコーヒーやレコードを楽しめる席を用意しています。</p></details>
+            <details><summary>普段から音量は大きいですか？</summary><p>通常営業では、会話や読書の邪魔にならない音量にしています。</p></details>
+            <details><summary>DJイベントの日は予約が必要ですか？</summary><p>イベント内容によって異なります。各イベント情報で案内します。</p></details>
+            <details><summary>グッズだけの購入もできますか？</summary><p>はい。オリジナルグッズ、豆、器具だけの購入も可能です。</p></details>
+            <details><summary>イベントや展示の相談はできますか？</summary><p>はい。内容、日程、人数を確認したうえでご提案します。</p></details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact" id="contact" aria-labelledby="contact-title">
+        <div class="container contact-grid">
+          <div class="contact-copy">
+            <p class="section-label">CONTACT</p>
+            <h2 id="contact-title">
+              <span class="text-line">イベント相談、</span>
+              <span class="text-line">出店相談はこちら。</span>
+            </h2>
+            <p>
+              DJイベント、貸切、展示、ポップアップなど、TAKE WORKS CAFEでの企画相談を受け付けています。内容がまだ固まっていなくても、まずは気軽にご相談ください。
+            </p>
+            <p class="portfolio-note">※このLPはポートフォリオ用の架空制作サンプルです。店舗、商品、イベント内容は実在しません。</p>
+          </div>
+          <form class="contact-form" id="contact-form" novalidate>
+            <div class="field"><label for="name">お名前 <span>必須</span></label><input id="name" name="name" autocomplete="name" required /></div>
+            <div class="field"><label for="email">メールアドレス <span>必須</span></label><input id="email" type="email" name="email" autocomplete="email" required /></div>
+            <div class="field"><label for="topic">相談内容</label><select id="topic" name="topic"><option>イベント相談</option><option>貸切相談</option><option>ポップアップ相談</option><option>展示相談</option><option>その他</option></select></div>
+            <div class="field"><label for="season">希望時期</label><input id="season" name="season" placeholder="例：10月の週末" /></div>
+            <fieldset class="field field-full">
+              <legend>イベント種別</legend>
+              <label class="radio"><input type="radio" name="event-type" value="音楽イベント" checked />音楽イベント</label>
+              <label class="radio"><input type="radio" name="event-type" value="物販・展示" />物販・展示</label>
+              <label class="radio"><input type="radio" name="event-type" value="貸切" />貸切</label>
+            </fieldset>
+            <div class="field field-full"><label for="message">メッセージ</label><textarea id="message" name="message" rows="5" placeholder="人数、内容、イメージなどがあればご記入ください。"></textarea></div>
+            <button class="button form-button" type="submit">イベント・貸切を相談する</button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="logo" href="index.html" aria-label="TAKE WORKS CAFE HOMEへ"><span class="logo-mark" aria-hidden="true">T</span><span>TAKE WORKS CAFE</span></a>
+        <a class="portfolio-link" href="../portfolio/index.html">PORTFOLIO</a>
+        <p>© TAKE WORKS CAFE / Portfolio sample</p>
+      </div>
+    </footer>
+    <a class="mobile-cta" href="#contact">イベント相談をする</a>
+    <script src="script.js"></script>
+  </body>
+</html>
