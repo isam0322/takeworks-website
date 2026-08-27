@@ -14,14 +14,13 @@
   --gold-glow:   rgba(200, 169, 110, 0.35);
   --text:        #e8e8e8;
   --text-muted:  #888888;
-  --text-dim:    #555555;
   --border:      rgba(200, 169, 110, 0.2);
   --border-hover:rgba(200, 169, 110, 0.6);
   --font-en:     'Space Grotesk', sans-serif;
-  --font-ja:     'Noto Sans JP', sans-serif;
+  --font-ja:     'Space Grotesk', 'Noto Sans JP', sans-serif;
   --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --radius-sm:   4px;
   --radius:      12px;
-  --radius-lg:   20px;
 }
 
 html { scroll-behavior: smooth; font-size: 16px; }
@@ -80,14 +79,14 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 14px 28px;
-  border-radius: 8px;
+  padding: 16px 32px;
+  border-radius: var(--radius);
   font-family: var(--font-en);
   font-weight: 600;
   font-size: 0.95rem;
   letter-spacing: 0.05em;
   cursor: pointer;
-  transition: all 0.25s var(--ease);
+  transition: background-color 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease), opacity 0.25s var(--ease);
   border: none;
   white-space: nowrap;
 }
@@ -113,7 +112,7 @@ body::before {
   transform: translateY(-2px);
 }
 
-.btn--lg { padding: 18px 40px; font-size: 1.05rem; }
+.btn--lg { padding: 24px 48px; font-size: 1.05rem; }
 
 /* ── Section Commons ── */
 .section { padding: 120px 0; }
@@ -218,9 +217,9 @@ body::before {
 }
 .nav__links a:hover { color: var(--gold); }
 .nav__cta {
-  padding: 9px 20px;
+  padding: 12px 24px;
   border: 1.5px solid var(--border-hover) !important;
-  border-radius: 8px;
+  border-radius: var(--radius);
   color: var(--text) !important;
   transition: border-color 0.2s, color 0.2s !important;
 }
@@ -229,19 +228,24 @@ body::before {
 .nav__burger {
   display: none;
   flex-direction: column;
-  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  /* タップ目標44×44px（ux-canon §4・見た目のバーは24pxのまま） */
+  width: 44px;
+  height: 44px;
+  padding: 0;
 }
 .nav__burger span {
   display: block;
   width: 24px;
   height: 2px;
   background: var(--text);
-  border-radius: 2px;
-  transition: all 0.3s;
+  border-radius: 999px;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s, transform 0.3s, opacity 0.3s;
 }
 
 .nav__mobile {
@@ -393,7 +397,7 @@ body::before {
   font-family: var(--font-en);
   font-size: 0.7rem;
   letter-spacing: 0.2em;
-  color: var(--text-dim);
+  color: var(--text-muted);
   text-transform: uppercase;
 }
 .hero__scroll-line {
@@ -471,7 +475,7 @@ body::before {
 .profile-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   padding: 36px 28px;
   text-align: center;
   position: sticky;
@@ -505,10 +509,10 @@ body::before {
   margin-bottom: 20px;
 }
 .profile-card__bio {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 20px;
+  line-height: 1.8;
+  margin-bottom: 24px;
   text-align: left;
 }
 .profile-card__tags {
@@ -525,7 +529,7 @@ body::before {
   background: var(--gold-dim);
   border: 1px solid var(--border);
   padding: 4px 12px;
-  border-radius: 100px;
+  border-radius: 999px;
 }
 
 /* ============================================================
@@ -583,7 +587,7 @@ body::before {
   color: inherit;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   padding: 32px;
   position: relative;
   overflow: hidden;
@@ -617,7 +621,7 @@ body::before {
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.1em;
-  color: var(--text-dim);
+  color: var(--text-muted);
   text-transform: uppercase;
   margin-bottom: 12px;
 }
@@ -689,7 +693,7 @@ body::before {
 .music__cover-art {
   width: 280px;
   height: 280px;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   background: linear-gradient(135deg, #1a1610 0%, #0d0b08 50%, #1a1610 100%);
   border: 1px solid var(--border);
   display: flex;
@@ -746,7 +750,7 @@ body::before {
 }
 .music__cover-lines div {
   height: 3px;
-  border-radius: 2px;
+  border-radius: 999px;
   background: var(--gold);
   animation: barAnim 1.2s ease-in-out infinite alternate;
 }
@@ -773,9 +777,9 @@ body::before {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 14px 0;
+  padding: 16px 0;
   border-bottom: 1px solid rgba(255,255,255,0.05);
-  transition: all 0.2s;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.2s, opacity 0.2s;
   cursor: default;
 }
 .music__track:hover .track-name { color: var(--gold); }
@@ -784,7 +788,7 @@ body::before {
   font-family: var(--font-en);
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--text-dim);
+  color: var(--text-muted);
   width: 24px;
   letter-spacing: 0.05em;
 }
@@ -809,12 +813,12 @@ body::before {
   padding: 12px 20px;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius);
   font-family: var(--font-en);
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--text-muted);
-  transition: all 0.25s var(--ease);
+  transition: background-color 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease), opacity 0.25s var(--ease);
 }
 .music__platform-btn svg { width: 18px; height: 18px; }
 .music__platform-btn:hover {
@@ -850,7 +854,7 @@ body::before {
   flex-direction: column;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   padding: 32px;
   text-decoration: none;
   color: inherit;
@@ -873,7 +877,7 @@ body::before {
   color: var(--bg);
   background: var(--gold);
   padding: 4px 10px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   letter-spacing: 0.05em;
 }
 
@@ -921,7 +925,7 @@ body::before {
   display: flex;
   align-items: center;
   gap: 20px;
-  transition: all 0.3s var(--ease);
+  transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease), opacity 0.3s var(--ease);
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -945,7 +949,7 @@ body::before {
   width: 48px;
   height: 48px;
   background: var(--gold-dim);
-  border-radius: 12px;
+  border-radius: var(--radius);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -974,8 +978,8 @@ body::before {
 .platform-card__arrow {
   font-family: var(--font-en);
   font-size: 1.2rem;
-  color: var(--text-dim);
-  transition: all 0.3s;
+  color: var(--text-muted);
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s, transform 0.3s, opacity 0.3s;
   position: relative;
   z-index: 1;
 }
@@ -1029,7 +1033,7 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.25s var(--ease);
+  transition: background-color 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease), opacity 0.25s var(--ease);
 }
 .social-icon svg { width: 20px; height: 20px; color: var(--text-muted); transition: color 0.2s; }
 .social-icon:hover {
@@ -1053,10 +1057,10 @@ body::before {
   font-weight: 600;
   color: var(--gold);
   letter-spacing: 0.05em;
-  padding: 9px 20px;
+  padding: 12px 24px;
   border: 1.5px solid var(--border-hover);
-  border-radius: 8px;
-  transition: all 0.2s;
+  border-radius: var(--radius);
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.2s, opacity 0.2s;
 }
 .nav__cta-link:hover {
   background: var(--gold-dim);
@@ -1083,15 +1087,22 @@ body::before {
   align-items: center;
   text-align: center;
 }
+/* 和文の本文は左揃え・行長は全角36字まで（DESIGN_DIRECTION.md「揃え方」）
+   中央揃えの長文は行の左右がガタつき、素人っぽさの最大の発生源になる */
+.who__body {
+  text-align: left;
+  max-width: 36em;
+  margin: 32px auto 0;
+}
 .who__body p {
   font-size: 1rem;
   color: var(--text-muted);
   line-height: 1.8;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   letter-spacing: 0.02em;
 }
+.who__body p:last-child { margin-bottom: 0; }
 .who__body strong { color: var(--text); font-weight: 600; }
-.who__body { margin-bottom: 32px; }
 
 /* ============================================================
    CTA BAND
@@ -1268,7 +1279,7 @@ body::before {
 .deliverable-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   padding: 32px 28px;
   transition: border-color 0.25s, transform 0.3s;
 }
@@ -1322,7 +1333,7 @@ body::before {
 .apply__note {
   margin-top: 16px;
   font-size: 0.8rem;
-  color: var(--text-dim);
+  color: var(--text-muted);
 }
 
 /* ============================================================
@@ -1353,9 +1364,9 @@ body::before {
   padding: 32px 16px;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   text-decoration: none;
-  transition: all 0.3s var(--ease);
+  transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease), opacity 0.3s var(--ease);
   position: relative;
   overflow: hidden;
 }
@@ -1418,7 +1429,7 @@ body::before {
 .footer__logo span { color: var(--gold); }
 .footer__copy {
   font-size: 0.78rem;
-  color: var(--text-dim);
+  color: var(--text-muted);
 }
 
 /* ============================================================
@@ -1500,17 +1511,15 @@ body::before {
     text-align: center;
   }
   .profile-card__bio {
-    text-align: center;
+    text-align: left;
     font-size: 0.88rem;
     line-height: 1.8;
   }
 
   /* --- WHO section --- */
-  .who__inner { gap: 36px; }
-  .who__text { text-align: center; }
+  .who__inner { gap: 32px; }
   .who__body p {
-    font-size: 0.9rem;
-    text-align: center;
+    font-size: 0.95rem;
     line-height: 1.8;
   }
 
@@ -1659,7 +1668,7 @@ body::before {
   padding: 34px 24px;
   background: var(--bg-card);
   border: 1px solid var(--border-hover);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
 }
 .sns-card--primary .sns-card__name {
   font-family: var(--font-ja);
@@ -1780,24 +1789,45 @@ a:focus-visible, .btn:focus-visible, .sns-card:focus-visible {
   margin-top: 16px;
   line-height: 1.9;
 }
+/* シグネチャー: WORKS をレコードの裏ジャケの曲目表として組む
+   （DESIGN_DIRECTION.md「シグネチャー」。箱を減らし、番号と罫線の整列で見せる） */
 .works-list {
   display: grid;
-  gap: 20px;
+  gap: 0;
   margin-top: 48px;
+  counter-reset: track;
+  border-bottom: 1px solid rgba(200, 169, 110, 0.15);
 }
 .work-card {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 32px;
+  counter-increment: track;
+  position: relative;
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(200, 169, 110, 0.15);
+  border-radius: 0;
+  padding: 32px 0 32px 64px;
   transition: border-color 0.3s var(--ease);
 }
-.work-card:hover { border-color: var(--border-hover); }
+.work-card::before {
+  content: counter(track, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 32px;
+  font-family: var(--font-en);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  transition: color 0.3s var(--ease);
+}
+.work-card:hover { border-top-color: var(--border-hover); }
+.work-card:hover::before { color: var(--gold); }
 .work-card__meta {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 14px;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 .work-card__type,
 .work-card__date {
@@ -1805,12 +1835,15 @@ a:focus-visible, .btn:focus-visible, .sns-card:focus-visible {
   font-size: 0.72rem;
   letter-spacing: 0.14em;
 }
+/* 分類は脇役。主役は作品名なので、金のベタ面から罫線だけに沈める
+   （金は「1画面に1つ際立たせる」ためだけに使う・Von Restorff） */
 .work-card__type {
-  color: var(--bg);
-  background: var(--gold);
-  padding: 3px 10px;
-  border-radius: 4px;
-  font-weight: 700;
+  color: var(--text-muted);
+  background: transparent;
+  padding: 4px 8px;
+  border: 1px solid rgba(200, 169, 110, 0.25);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
 }
 .work-card__date { color: var(--text-muted); }
 .work-card__title {
@@ -1837,8 +1870,8 @@ a:focus-visible, .btn:focus-visible, .sns-card:focus-visible {
   color: var(--gold);
   border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 7px 18px;
-  transition: all 0.3s var(--ease);
+  padding: 12px 24px;
+  transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease), opacity 0.3s var(--ease);
 }
 .work-card__links a:hover {
   border-color: var(--gold);
@@ -1851,6 +1884,8 @@ a:focus-visible, .btn:focus-visible, .sns-card:focus-visible {
   border: 1px solid var(--gold);
 }
 @media (max-width: 640px) {
-  .work-card { padding: 24px 20px; }
+  /* 曲目表: 狭い画面では番号を上に逃がす */
+  .work-card { padding: 48px 0 24px; }
+  .work-card::before { top: 24px; font-size: 0.8rem; }
   .work-card__title { font-size: 1.35rem; }
 }
