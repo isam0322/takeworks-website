@@ -1877,6 +1877,43 @@ a:focus-visible, .btn:focus-visible, .sns-card:focus-visible {
   border-color: var(--gold);
   background: var(--gold-dim);
 }
+/* リリースが積み上がっていく作品（LINEスタンプ）用の内側リスト。
+   1作品1カードのままシリーズを増やせるようにするための入れ物 */
+.work-card__releases {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  border-top: 1px solid rgba(200, 169, 110, 0.15);
+}
+.release {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(200, 169, 110, 0.15);
+}
+.release__title {
+  font-family: var(--font-en);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text);
+  transition: color 0.3s var(--ease);
+}
+.release__title::after {
+  content: "↗";
+  margin-left: 6px;
+  font-size: 0.8em;
+  color: var(--text-muted);
+  transition: color 0.3s var(--ease);
+}
+.release__title:hover,
+.release__title:hover::after { color: var(--gold); }
+.release__note {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
 .work-card--upcoming { border-style: dashed; }
 .work-card--upcoming .work-card__type {
   background: transparent;
