@@ -19,31 +19,52 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=15" />
+  <link rel="stylesheet" href="css/site.css?v=1" />
+  <meta name="theme-color" content="#0B0A08" />
 </head>
 <body>
+
+  <!-- アイコン（すべて単色。色は currentColor で CSS から決める） -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-vinyl" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6.5" opacity=".55"/><circle cx="12" cy="12" r="2.6"/></g><circle cx="12" cy="12" r=".9" fill="currentColor"/></symbol>
+      <symbol id="i-wave" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 10v4M7 7v10M11 4v16M15 8v8M19 6v12M23 11v2"/></g></symbol>
+      <symbol id="i-browser" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="16" rx="2.5"/><path d="M2.5 8.5h19"/></g><circle cx="5.6" cy="6.3" r=".9" fill="currentColor"/><circle cx="8.3" cy="6.3" r=".9" fill="currentColor"/></symbol>
+      <symbol id="i-bubble" viewBox="0 0 24 24"><path d="M12 3.5c-5 0-9 3.2-9 7.2 0 2.3 1.3 4.3 3.4 5.6L5.6 20l4.2-2.3c.7.1 1.4.2 2.2.2 5 0 9-3.2 9-7.2S17 3.5 12 3.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+      <symbol id="i-headphones" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4.5" height="6.5" rx="1.6"/><rect x="16.5" y="14" width="4.5" height="6.5" rx="1.6"/></g></symbol>
+      <symbol id="i-note" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5.5l11-2V16"/><circle cx="6.5" cy="18" r="2.6"/><circle cx="17.5" cy="16" r="2.6"/></g></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.2 9.2v5.6l4.8-2.8z" fill="currentColor"/></symbol>
+      <symbol id="i-pen" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M4 20l1-4.5L15.5 5a2.1 2.1 0 0 1 3 3L8 18.5z"/><path d="M13.5 7l3 3"/></g></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></g></symbol>
+      <symbol id="i-camera" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17" cy="7" r="1" fill="currentColor"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 4.5l14 15M19 4.5L5 19.5"/></g></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></g></symbol>
+    </defs>
+  </svg>
+
+  <a class="skip" href="#works">本文へ移動</a>
 
   <!-- ============================================================
     NAVIGATION
   ============================================================ -->
   <nav class="nav" id="nav">
     <div class="nav__inner">
-      <a href="index.html" class="nav__logo">TAKE<span> WORKS</span></a>
-      <div class="nav__links" style="margin-left: auto; margin-right: 32px;">
+      <a href="index.html" class="nav__logo">TAKE <span>WORKS</span></a>
+      <div class="nav__links">
         <a href="#works">WORKS</a>
+        <a href="#media">MEDIA</a>
       </div>
-      <div class="nav__right">
-        <a href="https://lin.ee/ZqVM0cm" target="_blank" rel="noopener noreferrer" class="nav__cta-link" id="navLineBtn">公式LINEを登録 →</a>
-      </div>
-      <button class="nav__burger" id="navBurger" aria-label="メニューを開く">
+      <a href="https://lin.ee/ZqVM0cm" target="_blank" rel="noopener noreferrer" class="nav__cta" id="navLineBtn">公式LINE<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <button class="nav__burger" id="navBurger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMobile">
         <span></span><span></span><span></span>
       </button>
     </div>
     <div class="nav__mobile" id="navMobile">
       <ul>
         <li><a href="#works" class="mobile-link">WORKS</a></li>
+        <li><a href="#media" class="mobile-link">MEDIA</a></li>
         <li><a href="https://lin.ee/ZqVM0cm" target="_blank" rel="noopener noreferrer" class="mobile-link">公式LINEを登録</a></li>
       </ul>
     </div>
@@ -52,70 +73,73 @@
   <!-- ============================================================
     HERO
   ============================================================ -->
-  <section class="hero" id="hero">
-    <div class="hero__grid"></div>
-
+  <header class="hero" id="hero">
+    <div class="hero__light" aria-hidden="true"></div>
     <div class="hero__inner">
       <div class="hero__text">
-        <p class="hero__label fade-in" data-delay="0">FIREFIGHTER 15YRS <span class="br-pc">&times;</span><br class="br-sp"> DJ 10YRS &times; AI</p>
-        <h1 class="hero__headline hero__headline--ja fade-in" data-delay="100">
+        <p class="hero__label fade-in" data-delay="0"><span>FIREFIGHTER 15YRS</span><span class="hero__x">&times;</span><span>DJ 10YRS</span><span class="hero__x">&times;</span><span>AI</span></p>
+        <h1 class="hero__headline fade-in" data-delay="100">
           好きなものはある。<br>
           <span>でも、それで食えるとは思っていない。</span>
         </h1>
         <p class="hero__sub fade-in" data-delay="200">消防士15年、DJ10年。その二つをAIで繋いで、<br class="br-pc">好きなカルチャーを仕事の柱に変える過程を、全部公開しています。</p>
+        <div class="wave fade-in" data-delay="250" aria-hidden="true"></div>
         <div class="hero__btns fade-in" data-delay="300">
-          <a href="#works" class="btn btn--primary btn--lg" id="heroWorksBtn">作品を見る</a>
+          <a href="#works" class="btn btn--primary" id="heroWorksBtn">作品を見る</a>
+          <a href="#media" class="btn btn--ghost">聴く・読む・見る</a>
+        </div>
+      </div>
+
+      <div class="hero__deck fade-in" data-delay="150" aria-hidden="true">
+        <div class="record">
+          <div class="record__disc"><div class="record__label"><span>TAKE<br>WORKS</span></div></div>
+        </div>
+        <div class="tonearm"></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+  <!-- ============================================================
+    PROFILE
+  ============================================================ -->
+  <section class="who section" id="who" aria-label="プロフィール">
+    <div class="container">
+      <div class="profile reveal" id="profileCard">
+        <div class="profile__disc" aria-hidden="true">
+          <img src="assets/images/maru.gif" alt="" width="120" height="120" />
+        </div>
+        <div class="profile__body">
+          <p class="eyebrow">PROFILE</p>
+          <h2 class="profile__name">TAKE WORKS</h2>
+          <p class="profile__title">消防士15年 × DJ10年 × AI</p>
+          <p class="profile__bio">元消防士（15年）。現場で求められるのは、状況を見て優先順位を決め、今やるべきことを「実行」する力でした。</p>
+          <p class="profile__bio">そのかたわらで10年以上、HIPHOPのDJとビートメイクを続けてきました。その二つをAIで繋いで、好きなものを仕事の柱に変える過程をここで公開しています。</p>
+          <ul class="tags">
+            <li>#HIPHOP</li><li>#DJ</li><li>#ビートメイク</li><li>#AI活用</li><li>#制作過程の公開</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-    WHO
+    WORKS — レコードのトラックリスト
   ============================================================ -->
-  <section class="who section" id="who">
+  <section class="works section" id="works">
     <div class="container">
-      <div class="who__inner">
-
-        <div class="who__profile reveal">
-          <div class="profile-card" id="profileCard" style="max-width: 600px; margin: 0 auto;">
-            <div class="profile-card__avatar">
-              <img src="assets/images/maru.gif" alt="TAKE WORKS" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" />
-            </div>
-            <div class="profile-card__name">TAKE WORKS</div>
-            <div class="profile-card__title">消防士15年 × DJ10年 × AI</div>
-            <div class="profile-card__bio">
-              元消防士（15年）。現場で求められるのは、状況を見て優先順位を決め、今やるべきことを「実行」する力でした。<br><br>そのかたわらで10年以上、HIPHOPのDJとビートメイクを続けてきました。その二つをAIで繋いで、好きなものを仕事の柱に変える過程をここで公開しています。
-            </div>
-            <div class="profile-card__tags">
-              <span>#HIPHOP</span>
-              <span>#DJ</span>
-              <span>#ビートメイク</span>
-              <div style="flex-basis: 100%; height: 0; margin: 0;"></div>
-              <span>#AI活用</span>
-              <span>#制作過程の公開</span>
-            </div>
-          </div>
-        </div>
-
+      <div class="section-head reveal">
+        <p class="eyebrow">WORKS</p>
+        <h2 class="section-title">作ったもの</h2>
+        <p class="section-lead">特別な技術があったわけではありません。作りながら、覚えました。<br class="br-pc">ここに並んでいるのは、その過程で実際に作って世に出したものです。</p>
       </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-    PORTFOLIO
-  ============================================================ -->
-  <section class="portfolio section" id="works" style="background: var(--bg-card); position: relative;">
-    <div class="container">
-      <div class="section-label reveal">WORKS</div>
-      <h2 class="section-title reveal">作ったもの</h2>
-      <p class="works__lead reveal">特別な技術があったわけではありません。作りながら、覚えました。<br class="br-sp">ここに並んでいるのは、その過程で実際に作って世に出したものです。</p>
 
       <div class="works-list reveal">
 
         <article class="work-card">
           <div class="work-card__meta">
-            <span class="work-card__type">MUSIC</span>
+            <span class="work-card__type"><svg class="ico" aria-hidden="true"><use href="#i-vinyl"/></svg>MUSIC</span>
             <span class="work-card__date">2026.06.13</span>
           </div>
           <h3 class="work-card__title">ZASHIKI</h3>
@@ -128,7 +152,7 @@
 
         <article class="work-card">
           <div class="work-card__meta">
-            <span class="work-card__type">MUSIC</span>
+            <span class="work-card__type"><svg class="ico" aria-hidden="true"><use href="#i-vinyl"/></svg>MUSIC</span>
             <span class="work-card__date">2026.08.01</span>
           </div>
           <h3 class="work-card__title">FOUND.</h3>
@@ -140,10 +164,10 @@
 
         <article class="work-card">
           <div class="work-card__meta">
-            <span class="work-card__type">WEB</span>
+            <span class="work-card__type"><svg class="ico" aria-hidden="true"><use href="#i-browser"/></svg>WEB</span>
             <span class="work-card__date">2026</span>
           </div>
-          <h3 class="work-card__title">このサイト</h3>
+          <h3 class="work-card__title work-card__title--ja">このサイト</h3>
           <p class="work-card__desc">AIを使って設計・制作・公開まで行った自社サイト。作り方そのものが、これから出していくコンテンツの題材になります。</p>
           <div class="work-card__links">
             <a href="https://note.com/tim15" target="_blank" rel="noopener noreferrer">制作過程をnoteで公開</a>
@@ -152,7 +176,7 @@
 
         <article class="work-card">
           <div class="work-card__meta">
-            <span class="work-card__type">WEB / LP</span>
+            <span class="work-card__type"><svg class="ico" aria-hidden="true"><use href="#i-browser"/></svg>WEB / LP</span>
             <span class="work-card__date">2026.08.06</span>
           </div>
           <h3 class="work-card__title">TAKE WORKS CAFE</h3>
@@ -164,7 +188,7 @@
 
         <article class="work-card">
           <div class="work-card__meta">
-            <span class="work-card__type">WEB APP</span>
+            <span class="work-card__type"><svg class="ico" aria-hidden="true"><use href="#i-wave"/></svg>WEB APP</span>
             <span class="work-card__date">2026.09.23</span>
           </div>
           <h3 class="work-card__title">RUN ORDER</h3>
@@ -176,7 +200,7 @@
 
         <article class="work-card">
           <div class="work-card__meta">
-            <span class="work-card__type">LINE STAMP</span>
+            <span class="work-card__type"><svg class="ico" aria-hidden="true"><use href="#i-bubble"/></svg>LINE STAMP</span>
             <span class="work-card__date">2026.08 —</span>
           </div>
           <h3 class="work-card__title">HIP HOP STICKERS</h3>
@@ -206,44 +230,52 @@
   </section>
 
   <!-- ============================================================
-    SNS LINKS
+    MEDIA — 聴く・読む・見る
   ============================================================ -->
-  <section class="sns-links section" id="sns">
+  <section class="media section" id="media">
     <div class="container">
-      <div class="section-label reveal">SUBSCRIBE</div>
-      <h2 class="section-title reveal">新しく作ったものは、<br class="br-sp">ここに最初に届きます。</h2>
+      <div class="section-head reveal">
+        <p class="eyebrow">MEDIA</p>
+        <h2 class="section-title">新しく作ったものは、<br class="br-sp">ここに最初に届きます。</h2>
+      </div>
 
-      <a href="https://lin.ee/ZqVM0cm" target="_blank" rel="noopener noreferrer" class="sns-card sns-card--primary reveal">
-        <div class="sns-card__name">公式LINE</div>
-        <div class="sns-card__note">新作のリリースと、その制作過程をお届けします</div>
+      <a href="https://lin.ee/ZqVM0cm" target="_blank" rel="noopener noreferrer" class="line-card reveal" id="snsLineBtn">
+        <span class="line-card__icon" aria-hidden="true"><svg class="ico"><use href="#i-bubble"/></svg></span>
+        <span class="line-card__text">
+          <span class="line-card__name">公式LINE</span>
+          <span class="line-card__note">新作のリリースと、その制作過程をお届けします</span>
+        </span>
+        <span class="line-card__cta">登録する<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
       </a>
 
-      <p class="sns-sub-label reveal">その他の発信メディア</p>
-      <div class="sns-grid sns-grid--sub reveal">
-        <a href="https://substack.com/@takeworks" target="_blank" rel="noopener noreferrer" class="sns-card">
-          <div class="sns-card__name">SUBSTACK</div>
-        </a>
-        <a href="https://www.instagram.com/take__works/?hl=ja" target="_blank" rel="noopener noreferrer" class="sns-card">
-          <div class="sns-card__name">Instagram</div>
-        </a>
-        <a href="https://x.com/TAKE___WORKS" target="_blank" rel="noopener noreferrer" class="sns-card">
-          <div class="sns-card__name">X</div>
-        </a>
-        <a href="https://note.com/tim15" target="_blank" rel="noopener noreferrer" class="sns-card">
-          <div class="sns-card__name">note</div>
-        </a>
-        <a href="https://www.youtube.com/@take_works1" target="_blank" rel="noopener noreferrer" class="sns-card">
-          <div class="sns-card__name">YouTube</div>
-        </a>
-        <a href="https://music.apple.com/us/album/zashiki/6778013028" target="_blank" rel="noopener noreferrer" class="sns-card">
-          <div class="sns-card__name">Apple Music</div>
-        </a>
-        <a href="https://open.spotify.com/intl-ja/track/0nyvBLzvUktXjzL9evwq5B?si=8aca7f522b0842ad" target="_blank" rel="noopener noreferrer" class="sns-card">
-          <div class="sns-card__name">Spotify</div>
-        </a>
+      <div class="shelves reveal">
+        <div class="shelf">
+          <h3 class="shelf__title"><span>LISTEN</span>聴く</h3>
+          <ul class="shelf__list">
+            <li><a class="media-row" href="https://open.spotify.com/intl-ja/track/0nyvBLzvUktXjzL9evwq5B?si=8aca7f522b0842ad" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-headphones"/></svg><span class="media-row__name">Spotify</span><span class="media-row__note">作品を配信中</span><svg class="ico media-row__go" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li><a class="media-row" href="https://music.apple.com/us/album/zashiki/6778013028" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-note"/></svg><span class="media-row__name">Apple Music</span><span class="media-row__note">作品を配信中</span><svg class="ico media-row__go" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li><a class="media-row" href="https://www.youtube.com/@take_works1" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span class="media-row__name">YouTube</span><span class="media-row__note">動画</span><svg class="ico media-row__go" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          </ul>
+        </div>
+        <div class="shelf">
+          <h3 class="shelf__title"><span>READ</span>読む</h3>
+          <ul class="shelf__list">
+            <li><a class="media-row" href="https://note.com/tim15" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-pen"/></svg><span class="media-row__name">note</span><span class="media-row__note">音楽の記事と制作過程</span><svg class="ico media-row__go" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li><a class="media-row" href="https://substack.com/@takeworks" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><span class="media-row__name">Substack</span><span class="media-row__note">ニュースレター</span><svg class="ico media-row__go" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          </ul>
+        </div>
+        <div class="shelf">
+          <h3 class="shelf__title"><span>WATCH</span>見る</h3>
+          <ul class="shelf__list">
+            <li><a class="media-row" href="https://www.instagram.com/take__works/?hl=ja" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-camera"/></svg><span class="media-row__name">Instagram</span><span class="media-row__note">HIPHOP・DJのリール</span><svg class="ico media-row__go" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li><a class="media-row" href="https://x.com/TAKE___WORKS" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg><span class="media-row__name">X</span><span class="media-row__note">短い発信</span><svg class="ico media-row__go" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- ============================================================
     FOOTER
@@ -251,12 +283,13 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__inner">
-        <span class="footer__logo">TAKE<span> WORKS</span></span>
+        <span class="footer__logo">TAKE <span>WORKS</span></span>
+        <div class="wave wave--mini" aria-hidden="true"></div>
         <span class="footer__copy">© 2025 TAKE WORKS. All Rights Reserved.</span>
       </div>
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=2"></script>
 </body>
 </html>
