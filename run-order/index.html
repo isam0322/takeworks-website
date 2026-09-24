@@ -15,9 +15,11 @@
 <meta property="og:title" content="RUN ORDER | TAKE WORKS">
 <meta property="og:description" content="出演者と持ち時間を入れるだけで、DJイベントのタイムテーブルを組むツール。順番はルーレットで決められます。">
 <meta property="og:url" content="https://takeworks-website.vercel.app/run-order/">
-<meta property="og:image" content="https://takeworks-website.vercel.app/ogp.jpg">
+<meta property="og:image" content="https://takeworks-website.vercel.app/ogp-run-order.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://takeworks-website.vercel.app/ogp.jpg">
+<meta name="twitter:image" content="https://takeworks-website.vercel.app/ogp-run-order.jpg">
 <style>
   /* ページの土台。Artifactでは自動で付いていたぶんを、ここで自前で用意する */
   :root{
@@ -254,6 +256,9 @@
        font-variant-numeric:tabular-nums;background:var(--surface);border:1px solid var(--line);
        border-radius:12px;padding:15px;overflow-x:auto;color:var(--ink)}
   .note{font-size:12.5px;color:var(--ink-mute);line-height:1.6}
+  .madeby{font-family:var(--num);font-weight:600;font-size:15px;letter-spacing:.12em;color:var(--ink-mute);margin-top:-4px}
+  .madeby a{color:var(--accent);display:inline-flex;align-items:center;min-height:44px;border-bottom:1px solid transparent}
+  .madeby a:hover{border-bottom-color:var(--accent)}
 
   details.import{border:1px solid var(--line);border-radius:12px;background:var(--surface);
                  padding:0 13px;box-shadow:var(--shadow)}
@@ -524,6 +529,7 @@
   </details>
 
   <p class="note">保存できるイベントの数に上限はありません（この端末のブラウザにだけ残ります）。消したイベントも20件までは取っておくので、「復元」で戻せます。</p>
+  <p class="madeby">Produced by <a href="https://takeworks-website.vercel.app/" target="_blank" rel="noopener noreferrer">TAKE WORKS</a></p>
 </div>
 
 <div class="scrim" id="scrim" hidden>
