@@ -110,6 +110,19 @@
   .filebar button{flex:1 1 0;min-width:88px}
 
   .meta{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+  .mylist{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:-4px}
+  .mylist__label{font-family:var(--num);font-size:11px;font-weight:600;letter-spacing:.22em;
+                 color:var(--ink-mute);margin-right:2px}
+  .chip{display:inline-flex;align-items:stretch;border:1px solid var(--line);border-radius:999px;
+        overflow:hidden;background:var(--surface-2)}
+  .chip__pick{background:none;border:0;color:var(--ink);font-family:var(--body);font-size:14px;
+              padding:0 6px 0 14px;min-height:40px;cursor:pointer}
+  .chip__del{background:none;border:0;color:var(--ink-mute);width:36px;min-height:40px;cursor:pointer;font-size:14px}
+  .chip__pick:hover{color:var(--accent)}
+  .chip__del:hover{color:var(--accent)}
+  .mylist__add{background:transparent;border:1px dashed var(--line);border-radius:999px;color:var(--ink-mute);
+               font-family:var(--body);font-size:13px;padding:0 14px;min-height:40px;cursor:pointer}
+  .mylist__add:hover{border-color:var(--accent);color:var(--accent)}
   .band{display:grid;gap:12px;border-top:1px solid var(--line);margin-top:15px;padding-top:15px}
   .band.clock{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .band.fee{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
@@ -426,8 +439,10 @@
   <div class="panel panel-pad">
     <div class="meta">
       <label class="fld span2"><span>Event</span><input id="evName" list="dlEvents" autocomplete="off"></label>
+      <div class="mylist span2" id="myEvents" data-kind="events" data-target="evName" data-label="MY EVENT"></div>
       <label class="fld"><span>Date</span><input id="evDate" type="date"></label>
       <label class="fld"><span>Place</span><input id="evVenue" type="text" list="dlVenues" autocomplete="off"></label>
+      <div class="mylist span2" id="myPlaces" data-kind="places" data-target="evVenue" data-label="MY PLACE"></div>
     </div>
 
     <div class="band clock">
@@ -467,10 +482,11 @@
       <p class="gap" id="gapLbl"></p>
     </div>
     <div class="autobar">
-      <button class="go grow" id="rouletteBtn">順番をルーレットで決める</button>
+      <button class="go grow" id="autoBtn">おまかせで組む</button>
+      <button class="ghost grow" id="rouletteBtn">順番をルーレットで決める</button>
       <button class="ghost fitbtn" id="fitLastBtn">最後の人で調整</button>
       <button class="ghost fitbtn" id="fitBtn">DJを同じ長さに</button>
-      <p class="hint" id="fitHint">上のCLOSEちょうどに終わるよう、持ち時間を計算し直します。LIVE・SHOWCASE・別枠の長さは変えません。</p>
+      <p class="hint" id="fitHint">「おまかせで組む」は、固定していない出演者の順番を抽選して、CLOSEちょうどに終わるよう全員を同じ長さに割ります。LIVE・SHOWCASE・別枠の長さは変えません。</p>
     </div>
   </div>
 
@@ -507,7 +523,7 @@
     </div>
   </details>
 
-  <p class="note">保存したイベントは、この端末のブラウザにだけ残ります。消したイベントは5件まで取っておくので、「復元」で戻せます。</p>
+  <p class="note">保存できるイベントの数に上限はありません（この端末のブラウザにだけ残ります）。消したイベントも20件までは取っておくので、「復元」で戻せます。</p>
 </div>
 
 <div class="scrim" id="scrim" hidden>
@@ -572,7 +588,8 @@ SHOWCASE FLOOR SIGNAL (20)
       <ol class="board" id="bulkPreview"></ol>
     </div>
     <footer>
-      <button class="go" id="bulkReplace" disabled>これに置き換える</button>
+      <button class="go" id="bulkAuto" disabled>置き換えて、おまかせで組む</button>
+      <button class="ghost" id="bulkReplace" disabled>これに置き換える</button>
       <button class="ghost" id="bulkAppend" disabled>後ろに足す</button>
       <button class="ghost" id="bulkCancel">やめる</button>
     </footer>
@@ -590,13 +607,13 @@ SHOWCASE FLOOR SIGNAL (20)
 (function(){
   "use strict";
   var KEY="tt.v1", LKEY="tt.list.v1", TKEY="tt.trash.v1";
-  var KINDS=[["DJ","DJ"],["B2B","B2B（交互）"],["LIVE","LIVE"],["SHOWCASE","SHOWCASE"],
+  var KINDS=[["DJ","DJ"],["B2B","B2B"],["LIVE","LIVE"],["SHOWCASE","SHOWCASE"],
              ["NONE","ラベルなし"],["OTHER","自由に書く"],["BREAK","別枠（転換・休憩）"]];
   var DEFAULT={
     id:null,
     ev:{name:"",date:"",venue:""},
     open:"22:00", start:"22:30", useOpen:true, useStart:true,
-    turn:0, over24:true, showKind:true, showBreak:true,
+    turn:0, over24:false, showKind:true, showBreak:true,
     adv:null, door:null, drink:"none", drinkFee:null, pNote:"", endWish:"04:00",
     creds:[],
     acts:[
@@ -618,11 +635,11 @@ SHOWCASE FLOOR SIGNAL (20)
     countLbl:$("countLbl"),out:$("out"),over24:$("over24"),showKind:$("showKind"),
     showBreak:$("showBreak"),addBtn:$("addBtn"),addBreakBtn:$("addBreakBtn"),bulkBtn:$("bulkBtn"),
     bulkScrim:$("bulkScrim"),bulkClose:$("bulkClose"),bulkText:$("bulkText"),
-    bulkPreview:$("bulkPreview"),bulkReplace:$("bulkReplace"),bulkAppend:$("bulkAppend"),
+    bulkPreview:$("bulkPreview"),bulkAuto:$("bulkAuto"),bulkReplace:$("bulkReplace"),bulkAppend:$("bulkAppend"),
     bulkCancel:$("bulkCancel"),creds:$("creds"),
     credPanel:$("credPanel"),addCredBtn:$("addCredBtn"),
     copyBtn:$("copyBtn"),resetBtn:$("resetBtn"),shareBtn:$("shareBtn"),shotBtn:$("shotBtn"),
-    endWish:$("endWish"),spanLbl:$("spanLbl"),gapLbl:$("gapLbl"),fitBtn:$("fitBtn"),fitLastBtn:$("fitLastBtn"),fitHint:$("fitHint"),rouletteBtn:$("rouletteBtn"),
+    endWish:$("endWish"),spanLbl:$("spanLbl"),gapLbl:$("gapLbl"),fitBtn:$("fitBtn"),fitLastBtn:$("fitLastBtn"),fitHint:$("fitHint"),rouletteBtn:$("rouletteBtn"),autoBtn:$("autoBtn"),
     scrim:$("scrim"),dlgClose:$("dlgClose"),stagePos:$("stagePos"),reel:$("reel"),
     board:$("board"),spinBtn:$("spinBtn"),sndBtn:$("sndBtn"),skipBtn:$("skipBtn"),applyBtn:$("applyBtn"),
     fileSel:$("fileSel"),saveBtn:$("saveBtn"),newBtn:$("newBtn"),dupBtn:$("dupBtn"),delBtn:$("delBtn"),
@@ -694,7 +711,7 @@ SHOWCASE FLOOR SIGNAL (20)
   }
   function placeholderFor(a){
     if(a.k==="BREAK") return "転換 / 休憩 / MC";
-    if(a.k==="B2B") return "TAKE b2b NAO";
+    if(a.k==="B2B") return "空欄でも可（自由参加のB2B）";
     if(a.k==="SHOWCASE") return "チーム名";
     return "出演者名";
   }
@@ -734,7 +751,7 @@ SHOWCASE FLOOR SIGNAL (20)
     return S.creds.map(function(c){
       var l=(c.l||"").trim(), v=(c.v||"").trim();
       if(!l&&!v) return "";
-      return l ? (v ? l+"  "+v : l) : v;
+      return l ? (v ? l+" : "+v : l) : v;
     }).filter(function(x){ return x; });
   }
   /* 「何時に終わりたいか」を分に直す。起点より前なら翌日とみなす */
@@ -796,7 +813,7 @@ SHOWCASE FLOOR SIGNAL (20)
   }
   function trashStore(arr){ try{ localStorage.setItem(TKEY,JSON.stringify(arr)); }catch(e){} }
   function trashPush(row){
-    var t=trashLoad(); t.unshift(row); trashStore(t.slice(0,5));
+    var t=trashLoad(); t.unshift(row); trashStore(t.slice(0,20));
   }
   function undoDelete(){
     var t=trashLoad();
@@ -862,6 +879,52 @@ SHOWCASE FLOOR SIGNAL (20)
     buildSuggests(arr);
   }
 
+  /* MY EVENT / MY PLACE。保存したイベントとは別に、よく使う名前を登録しておく */
+  var MKEY="tt.my.v1";
+  function myLoad(){
+    try{ var v=JSON.parse(localStorage.getItem(MKEY)||"{}");
+         return {events:Array.isArray(v.events)?v.events:[], places:Array.isArray(v.places)?v.places:[]}; }
+    catch(e){ return {events:[],places:[]}; }
+  }
+  function myStore(v){ try{ localStorage.setItem(MKEY,JSON.stringify(v)); }catch(e){} }
+  function renderMy(){
+    var my=myLoad();
+    ["myEvents","myPlaces"].forEach(function(id){
+      var box=document.getElementById(id); if(!box) return;
+      var kind=box.dataset.kind, input=document.getElementById(box.dataset.target);
+      box.innerHTML="";
+      var lab=document.createElement("span"); lab.className="mylist__label"; lab.textContent=box.dataset.label;
+      box.appendChild(lab);
+      my[kind].forEach(function(name,i){
+        var chip=document.createElement("span"); chip.className="chip";
+        var pick=document.createElement("button"); pick.type="button"; pick.className="chip__pick"; pick.textContent=name;
+        pick.addEventListener("click",function(){
+          input.value=name; input.dispatchEvent(new Event("input",{bubbles:true}));
+        });
+        var del=document.createElement("button"); del.type="button"; del.className="chip__del";
+        del.setAttribute("aria-label",name+" を外す"); del.textContent="✕";
+        del.addEventListener("click",function(){
+          var v=myLoad(); var gone=v[kind].splice(i,1)[0]; myStore(v); renderMy();
+          toast("「"+gone+"」を外しました","元に戻す",function(){
+            var w=myLoad(); w[kind].splice(i,0,gone); myStore(w); renderMy();
+          });
+        });
+        chip.appendChild(pick); chip.appendChild(del); box.appendChild(chip);
+      });
+      var add=document.createElement("button"); add.type="button"; add.className="mylist__add";
+      add.textContent="＋ いまの名前を登録";
+      add.addEventListener("click",function(){
+        var name=(input.value||"").trim();
+        if(!name){ toast("先に名前を入れてください"); input.focus(); return; }
+        var v=myLoad();
+        if(v[kind].indexOf(name)>-1){ toast("もう登録してあります"); return; }
+        v[kind].push(name); myStore(v); renderMy(); renderFiles();
+        toast("「"+name+"」を登録しました");
+      });
+      box.appendChild(add);
+    });
+  }
+
   /* 一度でも保存した名前は、次から候補に出す */
   var CRED_BASE=["FOOD","DRINK","SHOP","VJ","LIGHTING","DECO","PHOTO","MC","LIVE PAINT","SOUND"];
   function fillList(id,vals){
@@ -888,6 +951,9 @@ SHOWCASE FLOOR SIGNAL (20)
         if(c&&c.l&&String(c.l).trim()) cd[String(c.l).trim()]=1;
       });
     });
+    var my=myLoad();
+    my.events.forEach(function(n){ ev[n]=1; });
+    my.places.forEach(function(n){ ve[n]=1; });
     var srt=function(o){ return Object.keys(o).sort(function(a,b){ return a.localeCompare(b,"ja"); }); };
     fillList("dlEvents",srt(ev));
     fillList("dlVenues",srt(ve));
@@ -1059,9 +1125,9 @@ SHOWCASE FLOOR SIGNAL (20)
 
     S.acts.forEach(function(a,i){
       if(isBreak(a) && !S.showBreak) return;
-      var nm=a.n || (isBreak(a)?"転換":"(未定)");
+      var nm=a.n || (isBreak(a)?"転換":(a.k==="B2B"?"":"(未定)"));
       var kt=kindText(a);
-      if(S.showKind && kt) nm=kt+" "+nm;
+      if(S.showKind && kt) nm=nm ? kt+" "+nm : kt;
       lines.push(fmt(sl[i].s)+" - "+fmt(sl[i].e)+"  "+nm);
     });
     if(sl.length) lines.push("","CLOSE "+fmt(sl[sl.length-1].e));
@@ -1078,7 +1144,7 @@ SHOWCASE FLOOR SIGNAL (20)
     el.rouletteBtn.disabled = free<2;
     el.rouletteBtn.textContent = free<2 ? "ルーレットは2組以上の空きが要ります" : "順番をルーレットで決める";
     var hasAct = S.acts.filter(adjustable).length>0;
-    el.fitBtn.disabled = !hasAct; el.fitLastBtn.disabled = !hasAct;
+    el.fitBtn.disabled = !hasAct; el.fitLastBtn.disabled = !hasAct; el.autoBtn.disabled = !hasAct;
   }
 
   function refresh(keepFocus){
@@ -1281,23 +1347,47 @@ SHOWCASE FLOOR SIGNAL (20)
     refresh();
     sayHint((S.acts[last].n||"最後の出演者")+" を "+dur(newM)+" にしました。");
   });
-  el.fitBtn.addEventListener("click",function(){
+  /* CLOSEに合わせて、DJ枠を全員同じ長さに割る。成功したら true
+     5分単位で割り、割り切れない分は後ろの枠から5分ずつ足す（差は最大5分） */
+  function fitEqual(){
     var actIdx=[];
     S.acts.forEach(function(a,i){ if(adjustable(a)) actIdx.push(i); });
     var n=actIdx.length;
-    if(!n){ sayHint("長さを変えられる枠がありません（LIVE・SHOWCASE・別枠は変えません）。"); return; }
+    if(!n){ sayHint("長さを変えられる枠がありません（LIVE・SHOWCASE・別枠は変えません）。"); return false; }
     var base=baseMin(), end=wantedEnd();
-    if(end===null){ sayHint("終わりの時刻を入れてください。"); return; }
+    if(end===null){ sayHint("CLOSE（何時に終わりたいか）を入れてください。"); return false; }
     var fixedSum=S.acts.reduce(function(s,a){ return s+(adjustable(a)?0:Math.max(0,+a.m||0)); },0);
     var play=(end-base) - fixedSum;
-    if(play < n*5){ sayHint("LIVE・SHOWCASE・別枠を引くと時間が足りません。終わりを遅くしてください。"); return; }
-    var each=Math.max(5,Math.floor(play/n/5)*5);
-    var rest=play-each*n;
-    actIdx.forEach(function(i){ S.acts[i].m=each; });
-    S.acts[actIdx[n-1]].m += rest;
+    if(play < n*5){ sayHint("LIVE・SHOWCASE・別枠を引くと時間が足りません。CLOSEを遅くしてください。"); return false; }
+    var units=Math.floor(play/5), baseU=Math.floor(units/n), extra=units-baseU*n, odd=play-units*5;
+    actIdx.forEach(function(i,k){ S.acts[i].m=(baseU+(k>=n-extra?1:0))*5; });
+    if(odd) S.acts[actIdx[n-1]].m+=odd;
     refresh();
-    sayHint("DJ枠を1組 "+dur(each)+"（最後は "+dur(S.acts[actIdx[n-1]].m)+"）にそろえました。");
-  });
+    if(!extra && !odd) sayHint("DJ枠を全員 "+dur(baseU*5)+" にそろえました。");
+    else if(!odd) sayHint("ちょうど割り切れないため、"+dur(baseU*5)+" と "+dur(baseU*5+5)+" に分けました（後ろの枠を5分長めにしています）。");
+    else sayHint("DJ枠を "+dur(baseU*5)+" 前後にそろえ、割り切れない "+odd+"分 は最後の枠に足しました。");
+    return true;
+  }
+  el.fitBtn.addEventListener("click",function(){ fitEqual(); });
+
+  /* おまかせ: 固定していない枠の順番を抽選して、CLOSEに合わせて重みどおりに割る */
+  function shuffleFree(){
+    var slots=[], pool=[];
+    S.acts.forEach(function(a,i){ if(!(isBreak(a)||a.lock)){ slots.push(i); pool.push(a); } });
+    for(var i=pool.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=pool[i]; pool[i]=pool[j]; pool[j]=t; }
+    var next=S.acts.slice();
+    slots.forEach(function(pos,k){ next[pos]=pool[k]; });
+    S.acts=next;
+  }
+  function autoBuild(){
+    var before=clone(S.acts);
+    if(wantedEnd()===null){ toast("先にCLOSE（何時に終わりたいか）を入れてください"); el.endWish.focus(); return false; }
+    shuffleFree();
+    if(!fitEqual()){ S.acts=before; refresh(); return false; }
+    toast("おまかせで組みました","元に戻す",function(){ S.acts=before; refresh(); });
+    return true;
+  }
+  el.autoBtn.addEventListener("click",autoBuild);
 
   /* ---------- まとめて貼り付ける ---------- */
   var WORD_KINDS=[
@@ -1432,6 +1522,7 @@ SHOWCASE FLOOR SIGNAL (20)
       });
     }
     el.bulkReplace.disabled = rows.length===0;
+    el.bulkAuto.disabled = rows.length===0;
     el.bulkAppend.disabled = rows.length===0;
     return rows;
   }
@@ -1458,6 +1549,22 @@ SHOWCASE FLOOR SIGNAL (20)
     S.acts=S.acts.concat(rows);
     el.bulkText.value=""; closeBulk(); refresh();
     toast(rows.length+"組を後ろに足しました");
+  });
+  el.bulkAuto.addEventListener("click",function(){
+    var rows=parseBulk(el.bulkText.value);
+    if(!rows.length) return;
+    if(wantedEnd()===null){ toast("先にCLOSE（何時に終わりたいか）を入れてください"); return; }
+    var used=S.acts.some(function(a){ return (a.n||"").trim(); });
+    var go=function(){
+      var before=clone(S.acts);
+      S.acts=rows;
+      el.bulkText.value=""; closeBulk();
+      shuffleFree();
+      if(!fitEqual()){ refresh(); return; }
+      toast(rows.length+"組をおまかせで組みました","元に戻す",function(){ S.acts=before; refresh(); });
+    };
+    if(used) ask("いま入っている"+S.acts.length+"件を消して、"+rows.length+"組でおまかせで組みます。","組む",go);
+    else go();
   });
   el.bulkReplace.addEventListener("click",function(){
     var rows=parseBulk(el.bulkText.value);
@@ -1493,7 +1600,7 @@ SHOWCASE FLOOR SIGNAL (20)
     var rows=[];
     S.acts.forEach(function(a,i){
       if(isBreak(a) && !S.showBreak) return;
-      rows.push({t:fmt(sl[i].s), n:a.n || (isBreak(a)?"転換":"(未定)"),
+      rows.push({t:fmt(sl[i].s), n:a.n || (isBreak(a)?"転換":(a.k==="B2B"?"":"(未定)")),
                  k:(S.showKind?kindText(a):""), brk:isBreak(a)});
     });
 
@@ -1683,6 +1790,54 @@ SHOWCASE FLOOR SIGNAL (20)
       });
     });
   }
+
+  /* ---------- 音（ファイルは使わず、その場で作る） ---------- */
+  var SKEY="tt.sound.v1", AC=null, soundOn=true;
+  try{ soundOn = localStorage.getItem(SKEY)!=="0"; }catch(e){}
+  function audioCtx(){
+    if(!soundOn) return null;
+    try{
+      var C=window.AudioContext||window.webkitAudioContext;
+      if(!C) return null;
+      if(!AC) AC=new C();
+      if(AC.state==="suspended") AC.resume();
+      return AC;
+    }catch(e){ return null; }
+  }
+  function beep(freq,dur,type,vol,delay){
+    var ac=audioCtx(); if(!ac) return;
+    try{
+      var t0=ac.currentTime+(delay||0);
+      var o=ac.createOscillator(), g=ac.createGain();
+      o.type=type||"triangle";
+      o.frequency.setValueAtTime(freq,t0);
+      g.gain.setValueAtTime(0.0001,t0);
+      g.gain.exponentialRampToValueAtTime(vol||0.07,t0+0.008);
+      g.gain.exponentialRampToValueAtTime(0.0001,t0+(dur||0.08));
+      o.connect(g); g.connect(ac.destination);
+      o.start(t0); o.stop(t0+(dur||0.08)+0.03);
+    }catch(e){}
+  }
+  function sTick(){ beep(1350,0.03,"square",0.045); }
+  function sHit(){
+    beep(523.25,0.09,"triangle",0.10,0);
+    beep(659.25,0.09,"triangle",0.10,0.07);
+    beep(783.99,0.22,"triangle",0.11,0.14);
+  }
+  function sDone(){
+    beep(523.25,0.10,"triangle",0.09,0);
+    beep(659.25,0.10,"triangle",0.09,0.10);
+    beep(783.99,0.10,"triangle",0.09,0.20);
+    beep(1046.5,0.40,"triangle",0.11,0.30);
+  }
+  function setSound(on){
+    soundOn=!!on;
+    try{ localStorage.setItem(SKEY, soundOn?"1":"0"); }catch(e){}
+    el.sndBtn.setAttribute("aria-pressed",String(soundOn));
+    if(soundOn) sHit();
+  }
+  el.sndBtn.addEventListener("click",function(){ setSound(!soundOn); });
+  el.sndBtn.setAttribute("aria-pressed",String(soundOn));
 
   /* ---------- 順番のルーレット ---------- */
   var draw={order:[],pool:[],timer:null,started:false,done:false,fixed:[]};
@@ -1874,7 +2029,7 @@ SHOWCASE FLOOR SIGNAL (20)
   loadCurrent();
   var shared=readHash();
   if(shared){ S=shared; S.id=null; }
-  fill(); refresh(); renderFiles();
+  fill(); refresh(); renderFiles(); renderMy();
   if(shared) toast("共有リンクから読み込みました。保存すると一覧に入ります。");
 })();
 </script>

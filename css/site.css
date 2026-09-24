@@ -74,54 +74,32 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;o
 .nav__burger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px}
 .nav__mobile{display:none}
 
-/* ---------- ヒーロー ---------- */
-.hero{position:relative;overflow:hidden;padding-block:144px 96px}
-.hero__light{position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(40% 55% at 78% 45%,rgba(200,169,110,.16),transparent 70%),
-    radial-gradient(35% 40% at 15% 20%,rgba(142,58,47,.10),transparent 70%)}
-.hero__inner{position:relative;max-width:1040px;margin:0 auto;padding-inline:24px;
-  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:48px;align-items:center}
-.hero__label{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;
-  font-family:var(--num);font-weight:700;font-size:15px;letter-spacing:.2em;color:var(--gold);margin-bottom:24px}
+/* ---------- ヒーロー（中央揃え1列。2026-09-24 レコード盤は本人判断で撤去） ---------- */
+.hero{position:relative;overflow:hidden;padding-block:176px 96px}
+.hero__grid{position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(200,169,110,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,169,110,.04) 1px,transparent 1px);
+  background-size:80px 80px}
+.hero__inner{position:relative;max-width:960px;margin:0 auto;padding-inline:24px;
+  display:flex;flex-direction:column;align-items:center;text-align:center}
+.hero__label{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 12px;
+  font-family:var(--num);font-weight:700;font-size:16px;letter-spacing:.24em;color:var(--gold);margin-bottom:24px}
 .hero__x{color:var(--ink-mute);letter-spacing:0}
-.hero__headline{font-size:clamp(30px,4.6vw,52px);font-weight:700;line-height:1.35;letter-spacing:.01em}
+.hero__headline{font-size:clamp(28px,4.2vw,54px);font-weight:700;line-height:1.45;letter-spacing:.01em}
 .hero__headline span{display:block;color:var(--gold)}
-.hero__sub{margin-top:24px;color:var(--ink-mute);font-size:16px;max-width:36em}
-.hero__btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero__sub{margin:24px auto 0;color:var(--ink-mute);font-size:16px;max-width:42em}
+.hero__btns{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:32px}
 
 /* 音の波形。バーはJSで並べる（装飾なので、JSが無くても本文は困らない） */
-.wave{display:flex;align-items:center;gap:4px;height:40px;margin-top:32px}
+.wave{display:flex;align-items:center;justify-content:center;gap:4px;height:40px;margin-top:32px}
 .wave i{display:block;width:4px;border-radius:2px;background:var(--gold);opacity:.85;
   height:calc(var(--h,.5) * 100%);transform-origin:center;animation:eq 1.6s ease-in-out infinite;
   animation-delay:calc(var(--d,0) * -1s)}
 .wave i:nth-child(n+14){background:var(--ink-mute);opacity:.35}
 @keyframes eq{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.55)}}
-.wave--mini{height:16px;margin:0;gap:3px}
+.wave--mini{height:16px;margin:0;gap:3px;justify-content:flex-start}
 .wave--mini i{width:3px;animation:none}
-
-/* レコード盤。溝・ツヤ・赤いラベルをCSSだけで描く */
-.hero__deck{position:relative;justify-self:center;width:min(100%,420px);aspect-ratio:1}
-.record{position:absolute;inset:0;border-radius:50%;
-  box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04)}
-.record__disc{position:absolute;inset:0;border-radius:50%;animation:spin 60s linear infinite;
-  background:
-    conic-gradient(from 30deg,transparent 0 12%,rgba(255,255,255,.07) 18%,transparent 26% 62%,rgba(255,255,255,.05) 68%,transparent 76%),
-    repeating-radial-gradient(circle at 50% 50%,rgba(255,255,255,.035) 0 1px,transparent 1px 4px),
-    radial-gradient(circle at 50% 50%,#1a1814 0 34%,#0d0c0a 34.5% 100%)}
-.record__label{position:absolute;inset:32%;border-radius:50%;display:grid;place-items:center;
-  background:radial-gradient(circle at 50% 50%,var(--bg) 0 6%,var(--label-red) 6.5% 100%);
-  box-shadow:inset 0 0 0 2px rgba(0,0,0,.25),inset 0 0 0 10px rgba(238,232,220,.06)}
-.record__label span{font-family:var(--disp);font-size:clamp(13px,1.6vw,18px);line-height:1.05;
-  letter-spacing:.08em;color:var(--ink);text-align:center;transform:translateY(-38%)}
-.tonearm{position:absolute;right:-2%;top:-4%;width:46%;height:6px;border-radius:3px;
-  background:linear-gradient(90deg,#8b7650,var(--gold));transform-origin:right center;transform:rotate(-34deg);
-  box-shadow:0 6px 16px rgba(0,0,0,.5)}
-.tonearm::before{content:"";position:absolute;right:-12px;top:-9px;width:24px;height:24px;border-radius:50%;
-  background:#2a251d;border:2px solid var(--gold)}
-.tonearm::after{content:"";position:absolute;left:-6px;top:-5px;width:16px;height:16px;border-radius:var(--r-sm);
-  background:var(--gold)}
-@keyframes spin{to{transform:rotate(360deg)}}
 
 /* ---------- セクション共通 ---------- */
 .section{padding-block:120px;position:relative}
@@ -213,8 +191,6 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;o
 
 /* ---------- 画面が狭いとき ---------- */
 @media (max-width:900px){
-  .hero__inner{grid-template-columns:minmax(0,1fr)}
-  .hero__deck{order:-1;width:min(52vw,220px);margin-bottom:8px}
   .shelves{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:720px){
@@ -225,7 +201,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;o
   .nav__mobile ul{padding:8px 24px 24px}
   .nav__mobile a{display:block;padding:12px 0;min-height:44px;font-family:var(--num);font-weight:700;
     font-size:18px;letter-spacing:.12em;border-bottom:1px solid var(--line)}
-  .hero{padding-block:104px 64px}
+  .hero{padding-block:120px 64px}
   .section{padding-block:80px}
   .who{padding-block:0 64px}
   .profile{grid-template-columns:minmax(0,1fr);padding:32px 24px;gap:24px;justify-items:center}
