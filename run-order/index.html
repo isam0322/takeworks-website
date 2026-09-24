@@ -199,6 +199,34 @@
               display:grid;place-items:center;padding:0;flex:none}
   .cred .kill:hover{color:var(--accent);border-color:var(--accent)}
 
+  details.guide{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:0 14px;box-shadow:var(--shadow)}
+  details.guide summary{cursor:pointer;font-size:14px;color:var(--ink-mute);padding:12px 0;list-style:none;
+                        min-height:var(--tap);display:flex;align-items:center}
+  details.guide summary::-webkit-details-marker{display:none}
+  details.guide summary::before{content:"＋ ";font-family:var(--num)}
+  details.guide[open] summary::before{content:"− "}
+  details.guide ol{padding:0 0 14px 22px;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.7;color:var(--ink)}
+  details.guide li::marker{font-family:var(--num);font-weight:700;color:var(--accent)}
+  .stepper{display:flex;align-items:center;gap:12px}
+  .stepper button{width:var(--tap);height:var(--tap);border:1px solid var(--line);background:var(--surface-2);
+                  color:var(--ink);border-radius:8px;font-size:20px;line-height:1;cursor:pointer}
+  .stepper button:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+  .stepper button:disabled{opacity:.3;cursor:default}
+  .stepper output{font-family:var(--num);font-size:34px;font-weight:700;min-width:44px;text-align:center;
+                  font-variant-numeric:tabular-nums;color:var(--accent)}
+  .stepper span{font-size:14px;color:var(--ink-mute)}
+  .addnames{display:flex;flex-direction:column;gap:8px}
+  .addsum{margin:0;font-size:14px;font-weight:700;color:var(--accent)}
+  .act{-webkit-touch-callout:none;cursor:grab}
+  .act input,.act select,.act button{cursor:auto}
+  .act .slot,.act .unit,.act .slot *{-webkit-user-select:none;user-select:none}
+  body.dragmode{-webkit-user-select:none;user-select:none;cursor:grabbing}
+  .act.dragging{position:relative;z-index:5;border-color:var(--accent);background:var(--surface-2);
+                box-shadow:0 14px 34px rgba(0,0,0,.65);transition:none;opacity:.96}
+  .act.drop-before{box-shadow:0 -3px 0 0 var(--accent)}
+  .act.drop-after{box-shadow:0 3px 0 0 var(--accent)}
+  .lu-hint{font-family:var(--body);font-style:normal;font-size:12px;font-weight:400;letter-spacing:0;
+           text-transform:none;color:var(--ink-mute);margin-left:8px}
   .addrow{display:flex;gap:9px;flex-wrap:wrap}
   .addbtn{flex:1 1 100%;min-height:var(--tap);padding:12px;background:transparent;
           border:1px solid var(--line);border-radius:10px;color:var(--ink-mute);
@@ -425,10 +453,20 @@
           <rect x="203" y="7"  width="3" height="4"  rx="1.5"/>
         </g>
       </svg>
-      <p>持ち時間を入れると、時刻が決まります</p>
     </div>
     <div class="disc" aria-hidden="true"></div>
   </div>
+
+  <details class="guide">
+    <summary>使い方</summary>
+    <ol>
+      <li>上に、イベント名・日付・場所、OPEN／START、<b>CLOSE（何時に終わりたいか）</b>を入れます。</li>
+      <li>出演者を入れます。人数が多いときは「まとめて貼り付ける」。同じDJが何回か出るときは、「出演者を追加」で<b>回数</b>を選べます。</li>
+      <li>「<b>おまかせで組む</b>」で、順番と長さが自動で決まります。順番だけなら「順番をルーレットで決める」。動かしたくない枠（ゲストなど）は「固定」を押しておきます。手で並べ替えるときは、<b>行を長押し</b>してそのまま上下に動かします（PCはドラッグ）。</li>
+      <li>下の告知用テキストをコピー、または「画像用に表示」で画像にして使います。</li>
+      <li>「保存」しておくと、次回また開けます。前回と同じ構成なら「複製」から。</li>
+    </ol>
+  </details>
 
   <div class="filebar">
     <label class="fld"><span>保存したイベント</span>
@@ -474,7 +512,7 @@
   </div>
 
   <div class="sectlabel">
-    <span>Line Up</span>
+    <span>Line Up<em class="lu-hint">長押しで並べ替え</em></span>
     <b id="countLbl">0組</b>
   </div>
 
@@ -567,6 +605,41 @@
   <p class="shothint" id="shotHint">保存できないときは、画像を長押しして「写真に追加」を選んでください。</p>
 </div>
 
+<div class="scrim" id="addScrim" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="addTitle">
+    <header>
+      <h2 id="addTitle">出演者を追加</h2>
+      <button type="button" class="x" id="addClose" aria-label="閉じる">✕</button>
+    </header>
+    <div class="body">
+      <div>
+        <span class="lead">人数</span>
+        <div class="stepper">
+          <button type="button" id="addMinus" aria-label="人数を減らす">－</button>
+          <output id="addN" aria-live="polite">1</output>
+          <button type="button" id="addPlus" aria-label="人数を増やす">＋</button>
+          <span>人</span>
+        </div>
+      </div>
+      <div class="meta">
+        <label class="fld"><span>種別</span><select id="addKind"></select></label>
+        <label class="fld"><span>1人あたり</span>
+          <select id="addRounds"><option value="1">1回</option><option value="2">2回</option><option value="3">3回</option><option value="4">4回</option></select>
+        </label>
+      </div>
+      <div class="addnames" id="addNames"></div>
+      <label class="fld" id="addReplWrap" hidden><span></span>
+        <span style="text-transform:none;letter-spacing:0;font-family:var(--body);font-size:14px;color:var(--ink)"><input type="checkbox" id="addRepl" checked><span id="addReplLbl" style="font-size:14px"></span></span>
+      </label>
+      <p class="addsum" id="addSum"></p>
+    </div>
+    <footer>
+      <button class="ghost" id="addCancel">やめる</button>
+      <button class="go" id="addGo">追加する</button>
+    </footer>
+  </div>
+</div>
+
 <div class="scrim" id="askScrim" hidden>
   <div class="dlg ask" role="dialog" aria-modal="true" aria-labelledby="askTitle">
     <header><h2 id="askTitle">確認</h2></header>
@@ -639,7 +712,7 @@ SHOWCASE FLOOR SIGNAL (20)
     drink:$("drink"),drinkFee:$("drinkFee"),dfWrap:$("dfWrap"),pNote:$("pNote"),
     feeLine:$("feeLine"),acts:$("acts"),closeTime:$("closeTime"),totalLbl:$("totalLbl"),
     countLbl:$("countLbl"),out:$("out"),over24:$("over24"),showKind:$("showKind"),
-    showBreak:$("showBreak"),addBtn:$("addBtn"),addBreakBtn:$("addBreakBtn"),bulkBtn:$("bulkBtn"),
+    showBreak:$("showBreak"),addBtn:$("addBtn"),addScrim:$("addScrim"),addClose:$("addClose"),addCancel:$("addCancel"),addGo:$("addGo"),addMinus:$("addMinus"),addPlus:$("addPlus"),addN:$("addN"),addKind:$("addKind"),addRounds:$("addRounds"),addNames:$("addNames"),addSum:$("addSum"),addReplWrap:$("addReplWrap"),addRepl:$("addRepl"),addReplLbl:$("addReplLbl"),addBreakBtn:$("addBreakBtn"),bulkBtn:$("bulkBtn"),
     bulkScrim:$("bulkScrim"),bulkClose:$("bulkClose"),bulkText:$("bulkText"),
     bulkPreview:$("bulkPreview"),bulkAuto:$("bulkAuto"),bulkReplace:$("bulkReplace"),bulkAppend:$("bulkAppend"),
     bulkCancel:$("bulkCancel"),creds:$("creds"),
@@ -1089,6 +1162,101 @@ SHOWCASE FLOOR SIGNAL (20)
 
   function swap(a,b){ var t=S.acts[a]; S.acts[a]=S.acts[b]; S.acts[b]=t; refresh(); }
 
+  /* ---------- 長押し（PCはドラッグ）で並べ替え ---------- */
+  var DR={pending:false,on:false,li:null,from:-1,timer:null,sx:0,sy:0,cy:0,startPageY:0,mids:[],target:-1,raf:0,kind:""};
+  function actRows(){ return [].slice.call(el.acts.querySelectorAll(".act")); }
+  function isInteractive(t){ return !!(t && t.closest && t.closest("input,select,textarea,button,a,label")); }
+  function pageYNow(){ return DR.cy + (window.pageYOffset||document.documentElement.scrollTop||0); }
+
+  function dragStart(){
+    if(!DR.pending || !DR.li) return;
+    DR.pending=false; DR.on=true;
+    var rows=actRows();
+    DR.from=rows.indexOf(DR.li);
+    var sc=window.pageYOffset||0;
+    DR.mids=rows.map(function(r){ var b=r.getBoundingClientRect(); return b.top+sc+b.height/2; });
+    DR.startPageY=pageYNow();
+    DR.li.classList.add("dragging");
+    document.body.classList.add("dragmode");
+    try{ if(navigator.vibrate) navigator.vibrate(18); }catch(e){}
+    dragTick();
+  }
+  function dragUpdate(){
+    if(!DR.on) return;
+    var dy=pageYNow()-DR.startPageY;
+    DR.li.style.transform="translateY("+dy+"px)";
+    var y=pageYNow(), cnt=0;
+    DR.mids.forEach(function(m,i){ if(i!==DR.from && m<y) cnt++; });
+    DR.target=cnt;
+    var others=actRows().filter(function(r){ return r!==DR.li; });
+    others.forEach(function(r){ r.classList.remove("drop-before","drop-after"); });
+    if(!others.length) return;
+    if(cnt<others.length) others[cnt].classList.add("drop-before");
+    else others[others.length-1].classList.add("drop-after");
+  }
+  function dragTick(){
+    if(!DR.on) return;
+    var vh=window.innerHeight, edge=90;
+    if(DR.cy<edge) window.scrollBy(0,-Math.ceil((edge-DR.cy)/6));
+    else if(DR.cy>vh-edge) window.scrollBy(0,Math.ceil((DR.cy-(vh-edge))/6));
+    dragUpdate();
+    DR.raf=requestAnimationFrame(dragTick);
+  }
+  function dragClear(){
+    clearTimeout(DR.timer); cancelAnimationFrame(DR.raf);
+    if(DR.li){ DR.li.classList.remove("dragging"); DR.li.style.transform=""; }
+    actRows().forEach(function(r){ r.classList.remove("drop-before","drop-after"); });
+    document.body.classList.remove("dragmode");
+    DR.pending=false; DR.on=false; DR.li=null;
+  }
+  function dragEnd(commit){
+    if(DR.on) dragUpdate();
+    if(DR.on && commit && DR.target>-1 && DR.target!==DR.from){
+      var before=clone(S.acts), from=DR.from, to=DR.target;
+      dragClear();
+      var a=S.acts.splice(from,1)[0]; S.acts.splice(to,0,a);
+      refresh();
+      toast("順番を入れ替えました","元に戻す",function(){ S.acts=before; refresh(); });
+    } else dragClear();
+  }
+
+  /* タッチ: 長押しで開始。動かす前に指が動いたらスクロールとみなして中止 */
+  el.acts.addEventListener("touchstart",function(e){
+    if(e.touches.length!==1 || isInteractive(e.target)) return;
+    var li=e.target.closest(".act"); if(!li) return;
+    var t=e.touches[0];
+    dragClear();
+    DR.li=li; DR.pending=true; DR.kind="touch"; DR.sx=t.clientX; DR.sy=t.clientY; DR.cy=t.clientY;
+    DR.timer=setTimeout(dragStart,350);
+  },{passive:true});
+  document.addEventListener("touchmove",function(e){
+    if(DR.kind!=="touch") return;
+    var t=e.touches[0]; if(!t) return;
+    DR.cy=t.clientY;
+    if(DR.on){ e.preventDefault(); dragUpdate(); return; }
+    if(DR.pending && (Math.abs(t.clientX-DR.sx)>10 || Math.abs(t.clientY-DR.sy)>10)){ clearTimeout(DR.timer); DR.pending=false; DR.li=null; }
+  },{passive:false});
+  document.addEventListener("touchend",function(){ if(DR.kind==="touch") dragEnd(true); });
+  document.addEventListener("touchcancel",function(){ if(DR.kind==="touch") dragEnd(false); });
+
+  /* マウス: 押したまま少し動かすと開始 */
+  el.acts.addEventListener("mousedown",function(e){
+    if(e.button!==0 || isInteractive(e.target)) return;
+    var li=e.target.closest(".act"); if(!li) return;
+    dragClear();
+    DR.li=li; DR.pending=true; DR.kind="mouse"; DR.sx=e.clientX; DR.sy=e.clientY; DR.cy=e.clientY;
+    e.preventDefault();
+  });
+  document.addEventListener("mousemove",function(e){
+    if(DR.kind!=="mouse") return;
+    DR.cy=e.clientY;
+    if(DR.pending && Math.abs(e.clientY-DR.sy)>6) dragStart();
+    if(DR.on) dragUpdate();
+  });
+  document.addEventListener("mouseup",function(){ if(DR.kind==="mouse") dragEnd(true); });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape" && DR.on) dragEnd(false); });
+  el.acts.addEventListener("contextmenu",function(e){ if(!isInteractive(e.target)) e.preventDefault(); });
+
   function renderCreds(){
     if(!S.creds) S.creds=[];
     el.credPanel.hidden = S.creds.length===0;
@@ -1240,7 +1408,64 @@ SHOWCASE FLOOR SIGNAL (20)
     var rows=el.acts.querySelectorAll(".act"), last=rows[rows.length-1];
     if(last) last.querySelector(".name").focus();
   }
-  el.addBtn.addEventListener("click",function(){ addRow({n:"",m:60,k:"DJ",kx:"",lock:false}); });
+  /* 出演者を追加: 人数・種別・回数を選んで、まとめて足す */
+  var addState={n:1,names:[]};
+  function blankFree(){ return S.acts.filter(function(a){ return !isBreak(a) && !(a.n||"").trim() && !a.lock; }).length; }
+  function addRender(){
+    var n=addState.n, rounds=+el.addRounds.value;
+    el.addN.textContent=String(n);
+    el.addMinus.disabled = n<=1; el.addPlus.disabled = n>=20;
+    var box=el.addNames; box.innerHTML="";
+    for(var i=0;i<n;i++){
+      (function(i){
+        var inp=document.createElement("input");
+        inp.type="text"; inp.setAttribute("list","dlActs"); inp.autocomplete="off";
+        inp.placeholder = "名前"+(n>1?" "+(i+1):"")+"（空欄でも可）";
+        inp.setAttribute("aria-label","名前 "+(i+1));
+        inp.value = addState.names[i]||"";
+        inp.addEventListener("input",function(){ addState.names[i]=inp.value; });
+        box.appendChild(inp);
+      })(i);
+    }
+    var total=n*rounds;
+    el.addSum.textContent = rounds>1 ? n+"人 × "+rounds+"回 ＝ "+total+"枠を追加します" : n+"枠を追加します";
+    var bf=blankFree();
+    el.addReplWrap.hidden = bf===0;
+    if(bf) el.addReplLbl.textContent = " いまある空の枠（"+bf+"個）を消して、入れ替える";
+  }
+  function openAdd(){
+    addState={n:1,names:[]};
+    el.addKind.innerHTML="";
+    KINDS.forEach(function(kv){ if(kv[0]!=="BREAK" && kv[0]!=="OTHER"){ var o=document.createElement("option"); o.value=kv[0]; o.textContent=kv[1]; el.addKind.appendChild(o); } });
+    el.addKind.value="DJ"; el.addRounds.value="1"; el.addRepl.checked=true;
+    addRender();
+    el.addScrim.hidden=false;
+    document.addEventListener("keydown",onAddKey);
+    el.addGo.focus();
+  }
+  function closeAdd(){ el.addScrim.hidden=true; document.removeEventListener("keydown",onAddKey); el.addBtn.focus(); }
+  function onAddKey(e){ if(e.key==="Escape") closeAdd(); }
+  el.addBtn.addEventListener("click",openAdd);
+  el.addClose.addEventListener("click",closeAdd);
+  el.addCancel.addEventListener("click",closeAdd);
+  el.addScrim.addEventListener("mousedown",function(e){ if(e.target===el.addScrim) closeAdd(); });
+  el.addMinus.addEventListener("click",function(){ if(addState.n>1){ addState.n--; addRender(); } });
+  el.addPlus.addEventListener("click",function(){ if(addState.n<20){ addState.n++; addRender(); } });
+  el.addRounds.addEventListener("change",addRender);
+  el.addGo.addEventListener("click",function(){
+    var n=addState.n, rounds=+el.addRounds.value, kind=el.addKind.value, rows=[];
+    for(var r=0;r<rounds;r++){
+      for(var i=0;i<n;i++) rows.push({n:(addState.names[i]||"").trim(), m:60, k:kind, kx:"", lock:false});
+    }
+    if(S.acts.length+rows.length>80){ toast("枠が多すぎます（合計80まで）"); return; }
+    var before=clone(S.acts);
+    if(!el.addReplWrap.hidden && el.addRepl.checked){
+      S.acts=S.acts.filter(function(a){ return isBreak(a) || (a.n||"").trim() || a.lock; });
+    }
+    S.acts=S.acts.concat(rows);
+    closeAdd(); refresh();
+    toast(rounds>1 ? n+"人×"+rounds+"回＝"+rows.length+"枠を追加しました" : rows.length+"枠を追加しました","元に戻す",function(){ S.acts=before; refresh(); });
+  });
   el.addBreakBtn.addEventListener("click",function(){ addRow({n:"転換",m:15,k:"BREAK",kx:"",lock:false}); });
   el.addCredBtn.addEventListener("click",function(){
     if(!S.creds) S.creds=[];
@@ -1376,14 +1601,30 @@ SHOWCASE FLOOR SIGNAL (20)
   }
   el.fitBtn.addEventListener("click",function(){ fitEqual(); });
 
-  /* おまかせ: 固定していない枠の順番を抽選して、CLOSEに合わせて重みどおりに割る */
+  /* 同じ人（名前が同じ）が続けて出る並びかどうか。空欄・別枠は無関係 */
+  function sameName(a,b){
+    if(!a||!b||isBreak(a)||isBreak(b)) return false;
+    var x=(a.n||"").trim().toLowerCase(), y=(b.n||"").trim().toLowerCase();
+    return x!=="" && x===y;
+  }
+  function hasBackToBack(arr){
+    for(var i=0;i<arr.length-1;i++) if(sameName(arr[i],arr[i+1])) return true;
+    return false;
+  }
+  /* おまかせ: 固定していない枠の順番を抽選する。同じ人が続けて出ない並びを優先する */
   function shuffleFree(){
-    var slots=[], pool=[];
-    S.acts.forEach(function(a,i){ if(!(isBreak(a)||a.lock)){ slots.push(i); pool.push(a); } });
-    for(var i=pool.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=pool[i]; pool[i]=pool[j]; pool[j]=t; }
-    var next=S.acts.slice();
-    slots.forEach(function(pos,k){ next[pos]=pool[k]; });
-    S.acts=next;
+    var slots=[], base=[];
+    S.acts.forEach(function(a,i){ if(!(isBreak(a)||a.lock)){ slots.push(i); base.push(a); } });
+    var best=null;
+    for(var tries=0;tries<300;tries++){
+      var pool=base.slice();
+      for(var i=pool.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=pool[i]; pool[i]=pool[j]; pool[j]=t; }
+      var next=S.acts.slice();
+      slots.forEach(function(pos,k){ next[pos]=pool[k]; });
+      best=next;
+      if(!hasBackToBack(next)) break;
+    }
+    S.acts=best;
   }
   function autoBuild(){
     var before=clone(S.acts);
@@ -1872,7 +2113,7 @@ SHOWCASE FLOOR SIGNAL (20)
     for(var i=0;i<n;i++){
       if(lockedAt(i)){ draw.order[i]=i; draw.fixed[i]=true; } else draw.pool.push(i);
     }
-    draw.started=false; draw.done=false;
+    draw.started=false; draw.done=false; draw.plan=null;
     el.reel.textContent="—";
     el.reel.className="reel";
     el.stagePos.textContent = draw.pool.length>1
@@ -1929,6 +2170,28 @@ SHOWCASE FLOOR SIGNAL (20)
   function stopSpin(){
     if(draw.timer){ clearInterval(draw.timer); clearTimeout(draw.timer); draw.timer=null; }
   }
+  /* ルーレットの結果は、最初に全体の並びを決めておく（同じ人が続かない並びを探す）。
+     1枠ずつ順に選ぶ方式だと、最後に同じ人しか残らない行き止まりが起きるため */
+  function makePlan(){
+    var empty=[], pool=draw.pool.slice();
+    draw.order.forEach(function(v,i){ if(v===null) empty.push(i); });
+    var best=null;
+    for(var tries=0;tries<400;tries++){
+      var p=pool.slice();
+      for(var i=p.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=p[i]; p[i]=p[j]; p[j]=t; }
+      var seq=draw.order.map(function(v){ return v; });
+      empty.forEach(function(pos,k){ seq[pos]=p[k]; });
+      best=seq;
+      var okAll=true;
+      for(var q=0;q<seq.length-1;q++){ if(sameName(S.acts[seq[q]],S.acts[seq[q+1]])){ okAll=false; break; } }
+      if(okAll) break;
+    }
+    return best;
+  }
+  function pickWinner(slotIdx){
+    if(!draw.plan) draw.plan=makePlan();
+    return draw.plan[slotIdx];
+  }
   function spinOne(after){
     var slotIdx=nextEmpty();
     if(slotIdx<0 || !draw.pool.length){ finish(); return; }
@@ -1936,7 +2199,7 @@ SHOWCASE FLOOR SIGNAL (20)
     el.spinBtn.disabled=true; el.applyBtn.disabled=true;
     el.stagePos.textContent=posLabel(slotIdx);
     el.reel.className="reel spin";
-    var winner=draw.pool[Math.floor(Math.random()*draw.pool.length)];
+    var winner=pickWinner(slotIdx);
     var ticks=REDUCED?1:12+Math.floor(Math.random()*5), t=0;
     function step(){
       var pick=draw.pool[Math.floor(Math.random()*draw.pool.length)];
@@ -1995,7 +2258,7 @@ SHOWCASE FLOOR SIGNAL (20)
     while(draw.pool.length){
       var slotIdx=nextEmpty();
       if(slotIdx<0) break;
-      var w=draw.pool[Math.floor(Math.random()*draw.pool.length)];
+      var w=pickWinner(slotIdx);
       draw.order[slotIdx]=w;
       draw.pool.splice(draw.pool.indexOf(w),1);
     }
