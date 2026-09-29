@@ -167,6 +167,12 @@
         border-radius:999px;background:var(--surface-3);border-color:var(--surface-3);
         min-height:38px;color:var(--accent)}
   .unit{font-size:11px;color:var(--ink-mute);flex:none;margin-left:4px}
+  .mlockbtn{flex:none;width:34px;height:34px;margin-left:6px;border:1px solid var(--line);
+            background:var(--surface-2);color:var(--ink-mute);border-radius:8px;cursor:pointer;
+            font-size:14px;line-height:1;display:grid;place-items:center;padding:0}
+  .mlockbtn:hover:not(:disabled){color:var(--ink);border-color:var(--ink-mute)}
+  .mlockbtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent)}
+  .mlockbtn[hidden]{display:none}
   .sub{grid-column:1/-1;display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:2px}
   select.kind{flex:1 1 150px;min-width:0;max-width:none;padding:7px 30px 7px 10px;min-height:38px;
               font-size:14px;background-color:transparent;border-color:var(--line);color:var(--ink-mute)}
@@ -280,9 +286,11 @@
   .opts label{display:flex;align-items:center;gap:10px;cursor:pointer;min-height:26px}
   .opts input{width:22px;height:22px;min-height:0;flex:none;accent-color:var(--accent)}
 
-  .out{white-space:pre-wrap;font-family:var(--body);font-size:14px;line-height:1.8;
-       font-variant-numeric:tabular-nums;background:var(--surface);border:1px solid var(--line);
-       border-radius:12px;padding:15px;overflow-x:auto;color:var(--ink)}
+  .out{display:block;width:100%;box-sizing:border-box;white-space:pre-wrap;font-family:var(--body);
+       font-size:14px;line-height:1.8;font-variant-numeric:tabular-nums;background:var(--surface);
+       border:1px solid var(--line);border-radius:12px;padding:15px;overflow-x:auto;color:var(--ink);
+       resize:vertical;min-height:160px}
+  .out:focus{border-color:var(--accent);outline:none}
   .note{font-size:12.5px;color:var(--ink-mute);line-height:1.6}
   .madeby{font-family:var(--num);font-weight:600;font-size:15px;letter-spacing:.12em;color:var(--ink-mute);margin-top:-4px}
   .madeby a{color:var(--accent);display:inline-flex;align-items:center;min-height:44px;border-bottom:1px solid transparent}
@@ -360,10 +368,13 @@
 
   /* ---- 画像用 ---- */
   .shot{position:fixed;inset:0;background:rgba(2,3,2,.95);z-index:60;overflow:auto;
-        padding:14px;display:flex;flex-direction:column;align-items:center;gap:12px}
-  .shotbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;
+        padding:calc(20px + env(safe-area-inset-top,0px)) 14px calc(20px + env(safe-area-inset-bottom,0px));
+        display:flex;flex-direction:column;align-items:center;gap:12px}
+  .shotbar{position:sticky;top:0;z-index:2;width:100%;max-width:420px;display:flex;gap:10px;
+           align-items:center;flex-wrap:wrap;justify-content:center;
+           background:rgba(2,3,2,.95);padding-bottom:6px;
            color:var(--ink-mute);font-size:13px;text-align:center}
-  .shotbar button{background:transparent;border:1px solid var(--line);color:var(--ink);
+  .shotbar button{background:var(--surface);border:1px solid var(--line);color:var(--ink);
                   border-radius:8px;padding:11px 18px;font-family:var(--body);font-size:15px;
                   cursor:pointer;min-height:var(--tap)}
   .shotimg{width:min(100%,420px);height:auto;border-radius:14px;border:1px solid #23271F;
@@ -529,7 +540,7 @@
       <button class="ghost grow" id="rouletteBtn">順番をルーレットで決める</button>
       <button class="ghost fitbtn" id="fitLastBtn">最後の人で調整</button>
       <button class="ghost fitbtn" id="fitBtn">DJを同じ長さに</button>
-      <p class="hint" id="fitHint">「おまかせで組む」は、固定していない出演者の順番を抽選して、CLOSEちょうどに終わるよう全員を同じ長さに割ります。LIVE・SHOWCASE・別枠の長さは変えません。</p>
+      <p class="hint" id="fitHint">「おまかせで組む」は、固定していない出演者の順番を抽選して、CLOSEちょうどに終わるよう全員を同じ長さに割ります。LIVE・SHOWCASE・別枠、および🔒で長さを固定した枠は変えません。</p>
     </div>
   </div>
 
@@ -549,8 +560,9 @@
     <label><input type="checkbox" id="showBreak">別枠も書き出す</label>
   </div>
 
-  <div class="sectlabel"><span>告知用テキスト</span></div>
-  <div class="out" id="out"></div>
+  <div class="sectlabel"><span>告知用テキスト</span><span class="lu-hint" id="outEditedTag" hidden>手で編集中</span></div>
+  <textarea class="out" id="out" aria-label="告知用テキスト（直接編集できます）" rows="8"></textarea>
+  <button class="ghost" id="outRegenBtn" hidden>自動生成に戻す</button>
   <div class="actions">
     <button class="go" id="copyBtn">テキストをコピー</button>
     <button class="ghost" id="shareBtn">共有リンクをコピー</button>
@@ -696,11 +708,12 @@ SHOWCASE FLOOR SIGNAL (20)
     adv:null, door:null, drink:"none", drinkFee:null, pNote:"", endWish:"04:00",
     creds:[],
     acts:[
-      {n:"",m:60,k:"DJ",kx:"",lock:false},
-      {n:"",m:60,k:"DJ",kx:"",lock:false},
-      {n:"",m:60,k:"DJ",kx:"",lock:false},
-      {n:"",m:60,k:"DJ",kx:"",lock:false}
-    ]
+      {n:"",m:60,k:"DJ",kx:"",lock:false,mlock:false},
+      {n:"",m:60,k:"DJ",kx:"",lock:false,mlock:false},
+      {n:"",m:60,k:"DJ",kx:"",lock:false,mlock:false},
+      {n:"",m:60,k:"DJ",kx:"",lock:false,mlock:false}
+    ],
+    outManual:false, outText:""
   };
   var S=clone(DEFAULT);
   var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
@@ -718,6 +731,7 @@ SHOWCASE FLOOR SIGNAL (20)
     bulkCancel:$("bulkCancel"),creds:$("creds"),
     credPanel:$("credPanel"),addCredBtn:$("addCredBtn"),
     copyBtn:$("copyBtn"),resetBtn:$("resetBtn"),shareBtn:$("shareBtn"),shotBtn:$("shotBtn"),
+    outRegenBtn:$("outRegenBtn"),outEditedTag:$("outEditedTag"),
     endWish:$("endWish"),spanLbl:$("spanLbl"),gapLbl:$("gapLbl"),fitBtn:$("fitBtn"),fitLastBtn:$("fitLastBtn"),fitHint:$("fitHint"),rouletteBtn:$("rouletteBtn"),autoBtn:$("autoBtn"),
     scrim:$("scrim"),dlgClose:$("dlgClose"),stagePos:$("stagePos"),reel:$("reel"),
     board:$("board"),spinBtn:$("spinBtn"),sndBtn:$("sndBtn"),skipBtn:$("skipBtn"),applyBtn:$("applyBtn"),
@@ -781,8 +795,10 @@ SHOWCASE FLOOR SIGNAL (20)
     return d==="" ? null : Math.min(9999999,parseInt(d,10));
   }
   function isBreak(a){ return a.k==="BREAK"; }
-  /* 長さを触ってよい枠。LIVE と SHOWCASE は先方の尺が決まっているので触らない */
-  function adjustable(a){ return !isBreak(a) && a.k!=="LIVE" && a.k!=="SHOWCASE"; }
+  /* 種別として長さを触ってよい枠。LIVE と SHOWCASE は先方の尺が決まっているので触らない */
+  function kindAdjustable(a){ return !isBreak(a) && a.k!=="LIVE" && a.k!=="SHOWCASE"; }
+  /* 実際に長さを触ってよい枠。種別に加えて、個別に「長さを固定」していないこと */
+  function adjustable(a){ return kindAdjustable(a) && !a.mlock; }
   function kindText(a){
     if(a.k==="OTHER") return (a.kx||"").trim();
     if(a.k==="NONE"||a.k==="BREAK") return "";
@@ -866,8 +882,10 @@ SHOWCASE FLOOR SIGNAL (20)
       return {l:String(c.l||""), v:String(c.v||"")};
     });
     o.acts=(Array.isArray(v.acts)&&v.acts.length?v.acts:DEFAULT.acts).map(function(a){
-      return {n:String(a.n||""), m:Math.max(0,+a.m||0), k:a.k||"DJ", kx:String(a.kx||""), lock:!!a.lock};
+      return {n:String(a.n||""), m:Math.max(0,+a.m||0), k:a.k||"DJ", kx:String(a.kx||""), lock:!!a.lock, mlock:!!a.mlock};
     });
+    o.outManual=!!v.outManual;
+    o.outText=String(v.outText||"");
     if(!o.useOpen&&!o.useStart) o.useStart=true;
     o.turn=0;
     return o;
@@ -1107,6 +1125,7 @@ SHOWCASE FLOOR SIGNAL (20)
         '<div class="minswrap">'+
           '<input class="mins" type="number" inputmode="numeric" min="0" max="600" step="5" aria-label="持ち時間（分）">'+
           '<span class="unit">分</span>'+
+          '<button type="button" class="mlockbtn" aria-label="この長さを固定">🔒</button>'+
         '</div>'+
         '<div class="sub">'+
           '<select class="kind" aria-label="種別">'+opts+'</select>'+
@@ -1128,6 +1147,13 @@ SHOWCASE FLOOR SIGNAL (20)
       pin.setAttribute("aria-pressed", String(isBreak(a) ? true : !!a.lock));
       pin.disabled = isBreak(a);
       if(isBreak(a)) pin.title="別枠はいつも固定です";
+      var ml=li.querySelector(".mlockbtn");
+      var kAdj=kindAdjustable(a);
+      ml.hidden = !kAdj;
+      if(kAdj){
+        ml.setAttribute("aria-pressed", String(!!a.mlock));
+        ml.title = a.mlock ? "長さを固定中（タップで解除。おまかせ・DJを同じ長さに等で変わりません）" : "この長さを固定する（おまかせ・DJを同じ長さに等で変わらなくなります）";
+      }
 
       nm.addEventListener("input",function(){ a.n=nm.value; saveCurrent(); text(); });
       mi.addEventListener("input",function(){ a.m=Math.max(0,+mi.value||0); refresh(true); });
@@ -1138,6 +1164,7 @@ SHOWCASE FLOOR SIGNAL (20)
       });
       kx.addEventListener("input",function(){ a.kx=kx.value; saveCurrent(); text(); });
       pin.addEventListener("click",function(){ a.lock=!a.lock; refresh(); });
+      ml.addEventListener("click",function(){ a.mlock=!a.mlock; refresh(); });
       li.querySelector(".up").disabled = i===0;
       li.querySelector(".dn").disabled = i===S.acts.length-1;
       li.querySelector(".up").addEventListener("click",function(){ swap(i,i-1); });
@@ -1307,7 +1334,14 @@ SHOWCASE FLOOR SIGNAL (20)
     if(sl.length) lines.push("","CLOSE "+fmt(sl[sl.length-1].e));
     var cr=credLines();
     if(cr.length) lines.push("",cr.join("\n"));
-    el.out.textContent=lines.join("\n");
+    var auto=lines.join("\n");
+    el.outEditedTag.hidden=!S.outManual;
+    el.outRegenBtn.hidden=!S.outManual;
+    if(S.outManual){
+      if(document.activeElement!==el.out) el.out.value=S.outText;
+      return;
+    }
+    el.out.value=auto;
   }
 
   function syncClock(){
@@ -1482,7 +1516,17 @@ SHOWCASE FLOOR SIGNAL (20)
         function(){ toast("コピーできませんでした。手で選択してください。"); });
     } else toast("コピーできませんでした。手で選択してください。");
   }
-  el.copyBtn.addEventListener("click",function(){ copy(el.out.textContent,"テキストをコピーしました"); });
+  el.copyBtn.addEventListener("click",function(){ copy(el.out.value,"テキストをコピーしました"); });
+  el.out.addEventListener("input",function(){
+    S.outManual=true; S.outText=el.out.value;
+    el.outEditedTag.hidden=false; el.outRegenBtn.hidden=false;
+    saveCurrent();
+  });
+  el.outRegenBtn.addEventListener("click",function(){
+    S.outManual=false; S.outText="";
+    refresh();
+    toast("自動生成に戻しました");
+  });
   el.shareBtn.addEventListener("click",function(){
     var t=shareTarget();
     copy(t.text, t.kind==="リンク" ? "共有リンクをコピーしました" : "共有コードをコピーしました（リンクが作れない置き場です）");
@@ -1567,7 +1611,7 @@ SHOWCASE FLOOR SIGNAL (20)
   el.fitLastBtn.addEventListener("click",function(){
     var actIdx=[];
     S.acts.forEach(function(a,i){ if(adjustable(a)) actIdx.push(i); });
-    if(!actIdx.length){ sayHint("長さを変えられる枠がありません（LIVE・SHOWCASE・別枠は変えません）。"); return; }
+    if(!actIdx.length){ sayHint("長さを変えられる枠がありません（LIVE・SHOWCASE・別枠、長さを固定した枠は変えません）。"); return; }
     var end=wantedEnd();
     if(end===null){ sayHint("終わりの時刻を入れてください。"); return; }
     var sl=slots(), last=actIdx[actIdx.length-1];
@@ -1584,12 +1628,12 @@ SHOWCASE FLOOR SIGNAL (20)
     var actIdx=[];
     S.acts.forEach(function(a,i){ if(adjustable(a)) actIdx.push(i); });
     var n=actIdx.length;
-    if(!n){ sayHint("長さを変えられる枠がありません（LIVE・SHOWCASE・別枠は変えません）。"); return false; }
+    if(!n){ sayHint("長さを変えられる枠がありません（LIVE・SHOWCASE・別枠、長さを固定した枠は変えません）。"); return false; }
     var base=baseMin(), end=wantedEnd();
     if(end===null){ sayHint("CLOSE（何時に終わりたいか）を入れてください。"); return false; }
     var fixedSum=S.acts.reduce(function(s,a){ return s+(adjustable(a)?0:Math.max(0,+a.m||0)); },0);
     var play=(end-base) - fixedSum;
-    if(play < n*5){ sayHint("LIVE・SHOWCASE・別枠を引くと時間が足りません。CLOSEを遅くしてください。"); return false; }
+    if(play < n*5){ sayHint("LIVE・SHOWCASE・別枠・長さを固定した枠を引くと時間が足りません。CLOSEを遅くしてください。"); return false; }
     var units=Math.floor(play/5), baseU=Math.floor(units/n), extra=units-baseU*n, odd=play-units*5;
     actIdx.forEach(function(i,k){ S.acts[i].m=(baseU+(k>=n-extra?1:0))*5; });
     if(odd) S.acts[actIdx[n-1]].m+=odd;
