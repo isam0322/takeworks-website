@@ -172,7 +172,7 @@
             font-size:14px;line-height:1;display:grid;place-items:center;padding:0}
   .mlockbtn:hover:not(:disabled){color:var(--ink);border-color:var(--ink-mute)}
   .mlockbtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent)}
-  .mlockbtn[hidden]{display:none}
+  .mlockbtn:disabled{opacity:.3;cursor:default}
   .sub{grid-column:1/-1;display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:2px}
   select.kind{flex:1 1 150px;min-width:0;max-width:none;padding:7px 30px 7px 10px;min-height:38px;
               font-size:14px;background-color:transparent;border-color:var(--line);color:var(--ink-mute)}
@@ -1148,9 +1148,11 @@ SHOWCASE FLOOR SIGNAL (20)
       pin.disabled = isBreak(a);
       if(isBreak(a)) pin.title="別枠はいつも固定です";
       var ml=li.querySelector(".mlockbtn");
-      var kAdj=kindAdjustable(a);
-      ml.hidden = !kAdj;
-      if(kAdj){
+      ml.disabled = isBreak(a);
+      if(isBreak(a)){
+        ml.setAttribute("aria-pressed", "true");
+        ml.title="別枠は長さもいつも固定です";
+      } else {
         ml.setAttribute("aria-pressed", String(!!a.mlock));
         ml.title = a.mlock ? "長さを固定中（タップで解除。おまかせ・DJを同じ長さに等で変わりません）" : "この長さを固定する（おまかせ・DJを同じ長さに等で変わらなくなります）";
       }
