@@ -225,3 +225,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;o
 
 /* 和文の作品名。英字用の極太書体は和文を持たないので、和文の太字で重さを合わせる */
 .work-card__title--ja{font-family:var(--body);font-weight:700;letter-spacing:.02em}
+
+/* サブページ（music/）の先頭セクション。固定ナビ（64px）の下から始める */
+.section--page{padding-top:120px}
+@media (max-width:720px){.section--page{padding-top:96px}}
